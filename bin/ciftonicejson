@@ -1,0 +1,34 @@
+#!/bin/zsh -f
+
+setopt extendedglob
+zmodload -i zsh/zutil
+
+zparseopts -D -E -- \
+    o:=opt_o h=opt_help -help=opt_help || exit $?
+
+mydoc="${0:t} -- convert CIF to human readable json
+usage: ${0:t} [options] cif1 cif2 ...
+
+Options:
+  -o OUTDIR     write json files to this output directory.
+                Pipe to pager when not specified.
+"
+mydoc=${mydoc%%[[:space:]]##}
+
+if [[ $# == 0 || -n $opt_help ]]; then
+    print -r $mydoc
+    exit
+fi
+
+jqcolor=( )
+if [[ -z ${opt_o} && -t 0 && -t 1 ]]; then
+    jqcolor=( -C )
+fi
+
+for f; do
+    myout=/dev/stdout
+    if [[ -n ${opt_o} ]]; then
+        myout=${opt_o[-1]}/${f:t:r}.json
+    fi
+    cif2json $f | jq -S $jqcolor . >$myout
+done | less -rF
