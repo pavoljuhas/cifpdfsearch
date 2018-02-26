@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 
-from sys import exit
 import json
 import pprint
 from diffpy.pdfgetx.functs import composition_analysis
