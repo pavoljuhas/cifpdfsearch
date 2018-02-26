@@ -1,0 +1,798 @@
+{
+  "data": {
+    "cifversion": {
+      "major": 1,
+      "minor": 1
+    },
+    "inloop": {
+      "_atom_site_Wyckoff_symbol": 2,
+      "_atom_site_attached_hydrogens": 2,
+      "_atom_site_calc_flag": 2,
+      "_atom_site_fract_x": 2,
+      "_atom_site_fract_y": 2,
+      "_atom_site_fract_z": 2,
+      "_atom_site_label": 2,
+      "_atom_site_occupancy": 2,
+      "_atom_site_symmetry_multiplicity": 2,
+      "_atom_site_type_symbol": 2,
+      "_atom_type_oxidation_number": 3,
+      "_atom_type_symbol": 3,
+      "_publ_author_name": 0,
+      "_symmetry_equiv_pos_as_xyz": 1
+    },
+    "loops": [
+      [
+        "_publ_author_name"
+      ],
+      [
+        "_symmetry_equiv_pos_as_xyz"
+      ],
+      [
+        "_atom_site_label",
+        "_atom_site_type_symbol",
+        "_atom_site_symmetry_multiplicity",
+        "_atom_site_Wyckoff_symbol",
+        "_atom_site_fract_x",
+        "_atom_site_fract_y",
+        "_atom_site_fract_z",
+        "_atom_site_occupancy",
+        "_atom_site_attached_hydrogens",
+        "_atom_site_calc_flag"
+      ],
+      [
+        "_atom_type_symbol",
+        "_atom_type_oxidation_number"
+      ]
+    ],
+    "name": "5000222",
+    "precisions": {
+      "_atom_site_attached_hydrogens": [
+        null,
+        null
+      ],
+      "_atom_site_fract_x": [
+        null,
+        null
+      ],
+      "_atom_site_fract_y": [
+        null,
+        null
+      ],
+      "_atom_site_fract_z": [
+        null,
+        null
+      ],
+      "_atom_site_occupancy": [
+        null,
+        null
+      ],
+      "_atom_site_symmetry_multiplicity": [
+        null,
+        null
+      ],
+      "_atom_type_oxidation_number": [
+        null,
+        null
+      ],
+      "_cell_angle_alpha": [
+        null
+      ],
+      "_cell_angle_beta": [
+        null
+      ],
+      "_cell_angle_gamma": [
+        null
+      ],
+      "_cell_formula_units_Z": [
+        null
+      ],
+      "_cell_length_a": [
+        null
+      ],
+      "_cell_length_b": [
+        null
+      ],
+      "_cell_length_c": [
+        null
+      ],
+      "_cell_volume": [
+        null
+      ],
+      "_cod_database_code": [
+        null
+      ],
+      "_journal_page_first": [
+        null
+      ],
+      "_journal_page_last": [
+        null
+      ],
+      "_journal_volume": [
+        null
+      ],
+      "_journal_year": [
+        null
+      ],
+      "_space_group_IT_number": [
+        null
+      ],
+      "_symmetry_Int_Tables_number": [
+        null
+      ]
+    },
+    "tags": [
+      "_publ_author_name",
+      "_journal_name_full",
+      "_journal_page_first",
+      "_journal_page_last",
+      "_journal_paper_doi",
+      "_journal_volume",
+      "_journal_year",
+      "_chemical_formula_sum",
+      "_chemical_name_mineral",
+      "_chemical_name_systematic",
+      "_space_group_IT_number",
+      "_symmetry_cell_setting",
+      "_symmetry_Int_Tables_number",
+      "_symmetry_space_group_name_Hall",
+      "_symmetry_space_group_name_H-M",
+      "_cell_angle_alpha",
+      "_cell_angle_beta",
+      "_cell_angle_gamma",
+      "_cell_formula_units_Z",
+      "_cell_length_a",
+      "_cell_length_b",
+      "_cell_length_c",
+      "_cell_volume",
+      "_cod_database_code",
+      "_symmetry_equiv_pos_as_xyz",
+      "_atom_site_label",
+      "_atom_site_type_symbol",
+      "_atom_site_symmetry_multiplicity",
+      "_atom_site_Wyckoff_symbol",
+      "_atom_site_fract_x",
+      "_atom_site_fract_y",
+      "_atom_site_fract_z",
+      "_atom_site_occupancy",
+      "_atom_site_attached_hydrogens",
+      "_atom_site_calc_flag",
+      "_atom_type_symbol",
+      "_atom_type_oxidation_number"
+    ],
+    "types": {
+      "_atom_site_Wyckoff_symbol": [
+        "UQSTRING",
+        "UQSTRING"
+      ],
+      "_atom_site_attached_hydrogens": [
+        "INT",
+        "INT"
+      ],
+      "_atom_site_calc_flag": [
+        "UQSTRING",
+        "UQSTRING"
+      ],
+      "_atom_site_fract_x": [
+        "FLOAT",
+        "FLOAT"
+      ],
+      "_atom_site_fract_y": [
+        "FLOAT",
+        "FLOAT"
+      ],
+      "_atom_site_fract_z": [
+        "FLOAT",
+        "FLOAT"
+      ],
+      "_atom_site_label": [
+        "UQSTRING",
+        "UQSTRING"
+      ],
+      "_atom_site_occupancy": [
+        "FLOAT",
+        "FLOAT"
+      ],
+      "_atom_site_symmetry_multiplicity": [
+        "INT",
+        "INT"
+      ],
+      "_atom_site_type_symbol": [
+        "UQSTRING",
+        "UQSTRING"
+      ],
+      "_atom_type_oxidation_number": [
+        "FLOAT",
+        "FLOAT"
+      ],
+      "_atom_type_symbol": [
+        "UQSTRING",
+        "UQSTRING"
+      ],
+      "_cell_angle_alpha": [
+        "INT"
+      ],
+      "_cell_angle_beta": [
+        "INT"
+      ],
+      "_cell_angle_gamma": [
+        "INT"
+      ],
+      "_cell_formula_units_Z": [
+        "INT"
+      ],
+      "_cell_length_a": [
+        "FLOAT"
+      ],
+      "_cell_length_b": [
+        "FLOAT"
+      ],
+      "_cell_length_c": [
+        "FLOAT"
+      ],
+      "_cell_volume": [
+        "FLOAT"
+      ],
+      "_chemical_formula_sum": [
+        "SQSTRING"
+      ],
+      "_chemical_name_mineral": [
+        "UQSTRING"
+      ],
+      "_chemical_name_systematic": [
+        "SQSTRING"
+      ],
+      "_cod_database_code": [
+        "INT"
+      ],
+      "_journal_name_full": [
+        "SQSTRING"
+      ],
+      "_journal_page_first": [
+        "INT"
+      ],
+      "_journal_page_last": [
+        "INT"
+      ],
+      "_journal_paper_doi": [
+        "UQSTRING"
+      ],
+      "_journal_volume": [
+        "INT"
+      ],
+      "_journal_year": [
+        "INT"
+      ],
+      "_publ_author_name": [
+        "SQSTRING",
+        "SQSTRING"
+      ],
+      "_space_group_IT_number": [
+        "INT"
+      ],
+      "_symmetry_Int_Tables_number": [
+        "INT"
+      ],
+      "_symmetry_cell_setting": [
+        "UQSTRING"
+      ],
+      "_symmetry_equiv_pos_as_xyz": [
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING"
+      ],
+      "_symmetry_space_group_name_H-M": [
+        "SQSTRING"
+      ],
+      "_symmetry_space_group_name_Hall": [
+        "SQSTRING"
+      ]
+    },
+    "values": {
+      "_atom_site_Wyckoff_symbol": [
+        "a",
+        "c"
+      ],
+      "_atom_site_attached_hydrogens": [
+        "0",
+        "0"
+      ],
+      "_atom_site_calc_flag": [
+        "d",
+        "d"
+      ],
+      "_atom_site_fract_x": [
+        "0.",
+        "0.25"
+      ],
+      "_atom_site_fract_y": [
+        "0.",
+        "0.25"
+      ],
+      "_atom_site_fract_z": [
+        "0.",
+        "0.25"
+      ],
+      "_atom_site_label": [
+        "Ca1",
+        "F1"
+      ],
+      "_atom_site_occupancy": [
+        "1.",
+        "1."
+      ],
+      "_atom_site_symmetry_multiplicity": [
+        "4",
+        "8"
+      ],
+      "_atom_site_type_symbol": [
+        "Ca2+",
+        "F1-"
+      ],
+      "_atom_type_oxidation_number": [
+        "2.000",
+        "-1.000"
+      ],
+      "_atom_type_symbol": [
+        "Ca2+",
+        "F1-"
+      ],
+      "_cell_angle_alpha": [
+        "90"
+      ],
+      "_cell_angle_beta": [
+        "90"
+      ],
+      "_cell_angle_gamma": [
+        "90"
+      ],
+      "_cell_formula_units_Z": [
+        "4"
+      ],
+      "_cell_length_a": [
+        "5.4625"
+      ],
+      "_cell_length_b": [
+        "5.4625"
+      ],
+      "_cell_length_c": [
+        "5.4625"
+      ],
+      "_cell_volume": [
+        "163.0"
+      ],
+      "_chemical_formula_sum": [
+        "Ca F2"
+      ],
+      "_chemical_name_mineral": [
+        "Fluorite"
+      ],
+      "_chemical_name_systematic": [
+        "Calcium fluoride"
+      ],
+      "_cod_database_code": [
+        "5000222"
+      ],
+      "_journal_name_full": [
+        "Journal of Chemical Physics"
+      ],
+      "_journal_page_first": [
+        "2324"
+      ],
+      "_journal_page_last": [
+        "2329"
+      ],
+      "_journal_paper_doi": [
+        "10.1063/1.1726266"
+      ],
+      "_journal_volume": [
+        "41"
+      ],
+      "_journal_year": [
+        "1964"
+      ],
+      "_publ_author_name": [
+        "Batchelder, D N",
+        "Simmons, R O"
+      ],
+      "_space_group_IT_number": [
+        "225"
+      ],
+      "_symmetry_Int_Tables_number": [
+        "225"
+      ],
+      "_symmetry_cell_setting": [
+        "cubic"
+      ],
+      "_symmetry_equiv_pos_as_xyz": [
+        "x,y,z",
+        "y,z,x",
+        "z,x,y",
+        "x,z,y",
+        "y,x,z",
+        "z,y,x",
+        "x,-y,-z",
+        "y,-z,-x",
+        "z,-x,-y",
+        "x,-z,-y",
+        "y,-x,-z",
+        "z,-y,-x",
+        "-x,y,-z",
+        "-y,z,-x",
+        "-z,x,-y",
+        "-x,z,-y",
+        "-y,x,-z",
+        "-z,y,-x",
+        "-x,-y,z",
+        "-y,-z,x",
+        "-z,-x,y",
+        "-x,-z,y",
+        "-y,-x,z",
+        "-z,-y,x",
+        "-x,-y,-z",
+        "-y,-z,-x",
+        "-z,-x,-y",
+        "-x,-z,-y",
+        "-y,-x,-z",
+        "-z,-y,-x",
+        "-x,y,z",
+        "-y,z,x",
+        "-z,x,y",
+        "-x,z,y",
+        "-y,x,z",
+        "-z,y,x",
+        "x,-y,z",
+        "y,-z,x",
+        "z,-x,y",
+        "x,-z,y",
+        "y,-x,z",
+        "z,-y,x",
+        "x,y,-z",
+        "y,z,-x",
+        "z,x,-y",
+        "x,z,-y",
+        "y,x,-z",
+        "z,y,-x",
+        "x,1/2+y,1/2+z",
+        "1/2+x,y,1/2+z",
+        "1/2+x,1/2+y,z",
+        "y,1/2+z,1/2+x",
+        "1/2+y,z,1/2+x",
+        "1/2+y,1/2+z,x",
+        "z,1/2+x,1/2+y",
+        "1/2+z,x,1/2+y",
+        "1/2+z,1/2+x,y",
+        "x,1/2+z,1/2+y",
+        "1/2+x,z,1/2+y",
+        "1/2+x,1/2+z,y",
+        "y,1/2+x,1/2+z",
+        "1/2+y,x,1/2+z",
+        "1/2+y,1/2+x,z",
+        "z,1/2+y,1/2+x",
+        "1/2+z,y,1/2+x",
+        "1/2+z,1/2+y,x",
+        "x,1/2-y,1/2-z",
+        "1/2+x,-y,1/2-z",
+        "1/2+x,1/2-y,-z",
+        "y,1/2-z,1/2-x",
+        "1/2+y,-z,1/2-x",
+        "1/2+y,1/2-z,-x",
+        "z,1/2-x,1/2-y",
+        "1/2+z,-x,1/2-y",
+        "1/2+z,1/2-x,-y",
+        "x,1/2-z,1/2-y",
+        "1/2+x,-z,1/2-y",
+        "1/2+x,1/2-z,-y",
+        "y,1/2-x,1/2-z",
+        "1/2+y,-x,1/2-z",
+        "1/2+y,1/2-x,-z",
+        "z,1/2-y,1/2-x",
+        "1/2+z,-y,1/2-x",
+        "1/2+z,1/2-y,-x",
+        "-x,1/2+y,1/2-z",
+        "1/2-x,y,1/2-z",
+        "1/2-x,1/2+y,-z",
+        "-y,1/2+z,1/2-x",
+        "1/2-y,z,1/2-x",
+        "1/2-y,1/2+z,-x",
+        "-z,1/2+x,1/2-y",
+        "1/2-z,x,1/2-y",
+        "1/2-z,1/2+x,-y",
+        "-x,1/2+z,1/2-y",
+        "1/2-x,z,1/2-y",
+        "1/2-x,1/2+z,-y",
+        "-y,1/2+x,1/2-z",
+        "1/2-y,x,1/2-z",
+        "1/2-y,1/2+x,-z",
+        "-z,1/2+y,1/2-x",
+        "1/2-z,y,1/2-x",
+        "1/2-z,1/2+y,-x",
+        "-x,1/2-y,1/2+z",
+        "1/2-x,-y,1/2+z",
+        "1/2-x,1/2-y,z",
+        "-y,1/2-z,1/2+x",
+        "1/2-y,-z,1/2+x",
+        "1/2-y,1/2-z,x",
+        "-z,1/2-x,1/2+y",
+        "1/2-z,-x,1/2+y",
+        "1/2-z,1/2-x,y",
+        "-x,1/2-z,1/2+y",
+        "1/2-x,-z,1/2+y",
+        "1/2-x,1/2-z,y",
+        "-y,1/2-x,1/2+z",
+        "1/2-y,-x,1/2+z",
+        "1/2-y,1/2-x,z",
+        "-z,1/2-y,1/2+x",
+        "1/2-z,-y,1/2+x",
+        "1/2-z,1/2-y,x",
+        "-x,1/2-y,1/2-z",
+        "1/2-x,-y,1/2-z",
+        "1/2-x,1/2-y,-z",
+        "-y,1/2-z,1/2-x",
+        "1/2-y,-z,1/2-x",
+        "1/2-y,1/2-z,-x",
+        "-z,1/2-x,1/2-y",
+        "1/2-z,-x,1/2-y",
+        "1/2-z,1/2-x,-y",
+        "-x,1/2-z,1/2-y",
+        "1/2-x,-z,1/2-y",
+        "1/2-x,1/2-z,-y",
+        "-y,1/2-x,1/2-z",
+        "1/2-y,-x,1/2-z",
+        "1/2-y,1/2-x,-z",
+        "-z,1/2-y,1/2-x",
+        "1/2-z,-y,1/2-x",
+        "1/2-z,1/2-y,-x",
+        "-x,1/2+y,1/2+z",
+        "1/2-x,y,1/2+z",
+        "1/2-x,1/2+y,z",
+        "-y,1/2+z,1/2+x",
+        "1/2-y,z,1/2+x",
+        "1/2-y,1/2+z,x",
+        "-z,1/2+x,1/2+y",
+        "1/2-z,x,1/2+y",
+        "1/2-z,1/2+x,y",
+        "-x,1/2+z,1/2+y",
+        "1/2-x,z,1/2+y",
+        "1/2-x,1/2+z,y",
+        "-y,1/2+x,1/2+z",
+        "1/2-y,x,1/2+z",
+        "1/2-y,1/2+x,z",
+        "-z,1/2+y,1/2+x",
+        "1/2-z,y,1/2+x",
+        "1/2-z,1/2+y,x",
+        "x,1/2-y,1/2+z",
+        "1/2+x,-y,1/2+z",
+        "1/2+x,1/2-y,z",
+        "y,1/2-z,1/2+x",
+        "1/2+y,-z,1/2+x",
+        "1/2+y,1/2-z,x",
+        "z,1/2-x,1/2+y",
+        "1/2+z,-x,1/2+y",
+        "1/2+z,1/2-x,y",
+        "x,1/2-z,1/2+y",
+        "1/2+x,-z,1/2+y",
+        "1/2+x,1/2-z,y",
+        "y,1/2-x,1/2+z",
+        "1/2+y,-x,1/2+z",
+        "1/2+y,1/2-x,z",
+        "z,1/2-y,1/2+x",
+        "1/2+z,-y,1/2+x",
+        "1/2+z,1/2-y,x",
+        "x,1/2+y,1/2-z",
+        "1/2+x,y,1/2-z",
+        "1/2+x,1/2+y,-z",
+        "y,1/2+z,1/2-x",
+        "1/2+y,z,1/2-x",
+        "1/2+y,1/2+z,-x",
+        "z,1/2+x,1/2-y",
+        "1/2+z,x,1/2-y",
+        "1/2+z,1/2+x,-y",
+        "x,1/2+z,1/2-y",
+        "1/2+x,z,1/2-y",
+        "1/2+x,1/2+z,-y",
+        "y,1/2+x,1/2-z",
+        "1/2+y,x,1/2-z",
+        "1/2+y,1/2+x,-z",
+        "z,1/2+y,1/2-x",
+        "1/2+z,y,1/2-x",
+        "1/2+z,1/2+y,-x"
+      ],
+      "_symmetry_space_group_name_H-M": [
+        "F m -3 m"
+      ],
+      "_symmetry_space_group_name_Hall": [
+        "-F 4 2 3"
+      ]
+    }
+  },
+  "version": "1.1"
+}

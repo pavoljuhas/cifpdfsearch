@@ -1,0 +1,476 @@
+{
+  "data": {
+    "cifversion": {
+      "major": 1,
+      "minor": 1
+    },
+    "inloop": {
+      "_atom_site_U_iso_or_equiv": 3,
+      "_atom_site_aniso_U_11": 2,
+      "_atom_site_aniso_U_12": 2,
+      "_atom_site_aniso_U_13": 2,
+      "_atom_site_aniso_U_22": 2,
+      "_atom_site_aniso_U_23": 2,
+      "_atom_site_aniso_U_33": 2,
+      "_atom_site_aniso_label": 2,
+      "_atom_site_fract_x": 3,
+      "_atom_site_fract_y": 3,
+      "_atom_site_fract_z": 3,
+      "_atom_site_label": 3,
+      "_cod_related_entry_code": 4,
+      "_cod_related_entry_database": 4,
+      "_cod_related_entry_id": 4,
+      "_publ_author_name": 0,
+      "_symmetry_equiv_pos_as_xyz": 1
+    },
+    "loops": [
+      [
+        "_publ_author_name"
+      ],
+      [
+        "_symmetry_equiv_pos_as_xyz"
+      ],
+      [
+        "_atom_site_aniso_label",
+        "_atom_site_aniso_U_11",
+        "_atom_site_aniso_U_22",
+        "_atom_site_aniso_U_33",
+        "_atom_site_aniso_U_12",
+        "_atom_site_aniso_U_13",
+        "_atom_site_aniso_U_23"
+      ],
+      [
+        "_atom_site_label",
+        "_atom_site_fract_x",
+        "_atom_site_fract_y",
+        "_atom_site_fract_z",
+        "_atom_site_U_iso_or_equiv"
+      ],
+      [
+        "_cod_related_entry_id",
+        "_cod_related_entry_database",
+        "_cod_related_entry_code"
+      ]
+    ],
+    "name": "9004141",
+    "precisions": {
+      "_atom_site_U_iso_or_equiv": [
+        null,
+        null
+      ],
+      "_atom_site_aniso_U_11": [
+        null,
+        null
+      ],
+      "_atom_site_aniso_U_12": [
+        null,
+        null
+      ],
+      "_atom_site_aniso_U_13": [
+        null,
+        null
+      ],
+      "_atom_site_aniso_U_22": [
+        null,
+        null
+      ],
+      "_atom_site_aniso_U_23": [
+        null,
+        null
+      ],
+      "_atom_site_aniso_U_33": [
+        null,
+        null
+      ],
+      "_atom_site_fract_x": [
+        null,
+        null
+      ],
+      "_atom_site_fract_y": [
+        null,
+        null
+      ],
+      "_atom_site_fract_z": [
+        null,
+        null
+      ],
+      "_cell_angle_alpha": [
+        null
+      ],
+      "_cell_angle_beta": [
+        null
+      ],
+      "_cell_angle_gamma": [
+        null
+      ],
+      "_cell_length_a": [
+        null
+      ],
+      "_cell_length_b": [
+        null
+      ],
+      "_cell_length_c": [
+        null
+      ],
+      "_cell_volume": [
+        null
+      ],
+      "_cod_database_code": [
+        null
+      ],
+      "_cod_related_entry_code": [
+        null
+      ],
+      "_cod_related_entry_id": [
+        null
+      ],
+      "_exptl_crystal_density_diffrn": [
+        null
+      ],
+      "_journal_page_first": [
+        null
+      ],
+      "_journal_page_last": [
+        null
+      ],
+      "_journal_volume": [
+        null
+      ],
+      "_journal_year": [
+        null
+      ],
+      "_space_group_IT_number": [
+        null
+      ]
+    },
+    "tags": [
+      "_publ_author_name",
+      "_publ_section_title",
+      "_journal_name_full",
+      "_journal_page_first",
+      "_journal_page_last",
+      "_journal_volume",
+      "_journal_year",
+      "_chemical_formula_sum",
+      "_chemical_name_mineral",
+      "_space_group_IT_number",
+      "_symmetry_space_group_name_Hall",
+      "_symmetry_space_group_name_H-M",
+      "_cell_angle_alpha",
+      "_cell_angle_beta",
+      "_cell_angle_gamma",
+      "_cell_length_a",
+      "_cell_length_b",
+      "_cell_length_c",
+      "_cell_volume",
+      "_exptl_crystal_density_diffrn",
+      "_cod_original_formula_sum",
+      "_cod_database_code",
+      "_symmetry_equiv_pos_as_xyz",
+      "_atom_site_aniso_label",
+      "_atom_site_aniso_U_11",
+      "_atom_site_aniso_U_22",
+      "_atom_site_aniso_U_33",
+      "_atom_site_aniso_U_12",
+      "_atom_site_aniso_U_13",
+      "_atom_site_aniso_U_23",
+      "_atom_site_label",
+      "_atom_site_fract_x",
+      "_atom_site_fract_y",
+      "_atom_site_fract_z",
+      "_atom_site_U_iso_or_equiv",
+      "_cod_related_entry_id",
+      "_cod_related_entry_database",
+      "_cod_related_entry_code"
+    ],
+    "types": {
+      "_atom_site_U_iso_or_equiv": [
+        "FLOAT",
+        "FLOAT"
+      ],
+      "_atom_site_aniso_U_11": [
+        "FLOAT",
+        "FLOAT"
+      ],
+      "_atom_site_aniso_U_12": [
+        "FLOAT",
+        "FLOAT"
+      ],
+      "_atom_site_aniso_U_13": [
+        "FLOAT",
+        "FLOAT"
+      ],
+      "_atom_site_aniso_U_22": [
+        "FLOAT",
+        "FLOAT"
+      ],
+      "_atom_site_aniso_U_23": [
+        "FLOAT",
+        "FLOAT"
+      ],
+      "_atom_site_aniso_U_33": [
+        "FLOAT",
+        "FLOAT"
+      ],
+      "_atom_site_aniso_label": [
+        "UQSTRING",
+        "UQSTRING"
+      ],
+      "_atom_site_fract_x": [
+        "FLOAT",
+        "FLOAT"
+      ],
+      "_atom_site_fract_y": [
+        "FLOAT",
+        "FLOAT"
+      ],
+      "_atom_site_fract_z": [
+        "FLOAT",
+        "FLOAT"
+      ],
+      "_atom_site_label": [
+        "UQSTRING",
+        "UQSTRING"
+      ],
+      "_cell_angle_alpha": [
+        "INT"
+      ],
+      "_cell_angle_beta": [
+        "INT"
+      ],
+      "_cell_angle_gamma": [
+        "INT"
+      ],
+      "_cell_length_a": [
+        "FLOAT"
+      ],
+      "_cell_length_b": [
+        "FLOAT"
+      ],
+      "_cell_length_c": [
+        "FLOAT"
+      ],
+      "_cell_volume": [
+        "FLOAT"
+      ],
+      "_chemical_formula_sum": [
+        "SQSTRING"
+      ],
+      "_chemical_name_mineral": [
+        "UQSTRING"
+      ],
+      "_cod_database_code": [
+        "INT"
+      ],
+      "_cod_original_formula_sum": [
+        "SQSTRING"
+      ],
+      "_cod_related_entry_code": [
+        "INT"
+      ],
+      "_cod_related_entry_database": [
+        "UQSTRING"
+      ],
+      "_cod_related_entry_id": [
+        "INT"
+      ],
+      "_exptl_crystal_density_diffrn": [
+        "FLOAT"
+      ],
+      "_journal_name_full": [
+        "SQSTRING"
+      ],
+      "_journal_page_first": [
+        "INT"
+      ],
+      "_journal_page_last": [
+        "INT"
+      ],
+      "_journal_volume": [
+        "INT"
+      ],
+      "_journal_year": [
+        "INT"
+      ],
+      "_publ_author_name": [
+        "SQSTRING",
+        "SQSTRING"
+      ],
+      "_publ_section_title": [
+        "TEXTFIELD"
+      ],
+      "_space_group_IT_number": [
+        "INT"
+      ],
+      "_symmetry_equiv_pos_as_xyz": [
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING"
+      ],
+      "_symmetry_space_group_name_H-M": [
+        "SQSTRING"
+      ],
+      "_symmetry_space_group_name_Hall": [
+        "SQSTRING"
+      ]
+    },
+    "values": {
+      "_atom_site_U_iso_or_equiv": [
+        "0.00532",
+        "0.00760"
+      ],
+      "_atom_site_aniso_U_11": [
+        "0.00695",
+        "0.00823"
+      ],
+      "_atom_site_aniso_U_12": [
+        "-0.00011",
+        "-0.00150"
+      ],
+      "_atom_site_aniso_U_13": [
+        "0.00000",
+        "0.00000"
+      ],
+      "_atom_site_aniso_U_22": [
+        "0.00695",
+        "0.00823"
+      ],
+      "_atom_site_aniso_U_23": [
+        "0.00000",
+        "0.00000"
+      ],
+      "_atom_site_aniso_U_33": [
+        "0.00204",
+        "0.00435"
+      ],
+      "_atom_site_aniso_label": [
+        "Ti",
+        "O"
+      ],
+      "_atom_site_fract_x": [
+        "0.00000",
+        "0.30510"
+      ],
+      "_atom_site_fract_y": [
+        "0.00000",
+        "0.30510"
+      ],
+      "_atom_site_fract_z": [
+        "0.00000",
+        "0.00000"
+      ],
+      "_atom_site_label": [
+        "Ti",
+        "O"
+      ],
+      "_cell_angle_alpha": [
+        "90"
+      ],
+      "_cell_angle_beta": [
+        "90"
+      ],
+      "_cell_angle_gamma": [
+        "90"
+      ],
+      "_cell_length_a": [
+        "4.593"
+      ],
+      "_cell_length_b": [
+        "4.593"
+      ],
+      "_cell_length_c": [
+        "2.959"
+      ],
+      "_cell_volume": [
+        "62.422"
+      ],
+      "_chemical_formula_sum": [
+        "O2 Ti"
+      ],
+      "_chemical_name_mineral": [
+        "Rutile"
+      ],
+      "_cod_database_code": [
+        "9004141"
+      ],
+      "_cod_original_formula_sum": [
+        "Ti O2"
+      ],
+      "_cod_related_entry_code": [
+        "142802"
+      ],
+      "_cod_related_entry_database": [
+        "ChemSpider"
+      ],
+      "_cod_related_entry_id": [
+        "1"
+      ],
+      "_exptl_crystal_density_diffrn": [
+        "4.250"
+      ],
+      "_journal_name_full": [
+        "The Canadian Mineralogist"
+      ],
+      "_journal_page_first": [
+        "77"
+      ],
+      "_journal_page_last": [
+        "85"
+      ],
+      "_journal_volume": [
+        "17"
+      ],
+      "_journal_year": [
+        "1979"
+      ],
+      "_publ_author_name": [
+        "Meagher, E. P.",
+        "Lager, G. A."
+      ],
+      "_publ_section_title": [
+        "\n Polyhedral thermal expansion in the TiO2 polymorphs: Refinement\n of the crystal structure of rutile and brookite at high temperature\n Sample at 25 degrees C"
+      ],
+      "_space_group_IT_number": [
+        "136"
+      ],
+      "_symmetry_equiv_pos_as_xyz": [
+        "x,y,z",
+        "-y,-x,z",
+        "y,x,-z",
+        "1/2+y,1/2-x,1/2-z",
+        "1/2-y,1/2+x,1/2+z",
+        "1/2+x,1/2-y,1/2+z",
+        "1/2-x,1/2+y,1/2-z",
+        "x,y,-z",
+        "-x,-y,z",
+        "y,x,z",
+        "-y,-x,-z",
+        "1/2-y,1/2+x,1/2-z",
+        "1/2+y,1/2-x,1/2+z",
+        "1/2-x,1/2+y,1/2+z",
+        "1/2+x,1/2-y,1/2-z",
+        "-x,-y,-z"
+      ],
+      "_symmetry_space_group_name_H-M": [
+        "P 42/m n m"
+      ],
+      "_symmetry_space_group_name_Hall": [
+        "-P 4n 2n"
+      ]
+    }
+  },
+  "version": "1.1"
+}

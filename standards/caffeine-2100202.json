@@ -1,0 +1,1126 @@
+{
+  "data": {
+    "cifversion": {
+      "major": 1,
+      "minor": 1
+    },
+    "inloop": {
+      "_atom_site_U_iso_or_equiv": 2,
+      "_atom_site_adp_type": 2,
+      "_atom_site_fract_x": 2,
+      "_atom_site_fract_y": 2,
+      "_atom_site_fract_z": 2,
+      "_atom_site_label": 2,
+      "_atom_site_occupancy": 2,
+      "_atom_site_type_symbol": 2,
+      "_atom_type_scat_dispersion_imag": 3,
+      "_atom_type_scat_dispersion_real": 3,
+      "_atom_type_scat_source": 3,
+      "_atom_type_symbol": 3,
+      "_cod_related_entry_code": 4,
+      "_cod_related_entry_database": 4,
+      "_cod_related_entry_id": 4,
+      "_publ_author_name": 0,
+      "_symmetry_equiv_pos_as_xyz": 1
+    },
+    "loops": [
+      [
+        "_publ_author_name"
+      ],
+      [
+        "_symmetry_equiv_pos_as_xyz"
+      ],
+      [
+        "_atom_site_label",
+        "_atom_site_fract_x",
+        "_atom_site_fract_y",
+        "_atom_site_fract_z",
+        "_atom_site_U_iso_or_equiv",
+        "_atom_site_adp_type",
+        "_atom_site_occupancy",
+        "_atom_site_type_symbol"
+      ],
+      [
+        "_atom_type_symbol",
+        "_atom_type_scat_dispersion_real",
+        "_atom_type_scat_dispersion_imag",
+        "_atom_type_scat_source"
+      ],
+      [
+        "_cod_related_entry_id",
+        "_cod_related_entry_database",
+        "_cod_related_entry_code"
+      ]
+    ],
+    "name": "2100202",
+    "precisions": {
+      "_atom_site_U_iso_or_equiv": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "_atom_site_fract_x": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "_atom_site_fract_y": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "_atom_site_fract_z": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "_atom_site_occupancy": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "_atom_type_scat_dispersion_imag": [
+        null,
+        null,
+        null,
+        null
+      ],
+      "_atom_type_scat_dispersion_real": [
+        null,
+        null,
+        null,
+        null
+      ],
+      "_cell_angle_alpha": [
+        null
+      ],
+      "_cell_angle_beta": [
+        null
+      ],
+      "_cell_angle_gamma": [
+        null
+      ],
+      "_cell_formula_units_Z": [
+        null
+      ],
+      "_cell_length_a": [
+        0.0005
+      ],
+      "_cell_length_b": [
+        0.0005
+      ],
+      "_cell_length_c": [
+        0.0002
+      ],
+      "_cell_measurement_temperature": [
+        null
+      ],
+      "_cell_volume": [
+        0.07
+      ],
+      "_chemical_formula_weight": [
+        null
+      ],
+      "_cod_database_code": [
+        null
+      ],
+      "_cod_related_entry_code": [
+        null,
+        null,
+        null
+      ],
+      "_cod_related_entry_id": [
+        null,
+        null,
+        null
+      ],
+      "_diffrn_radiation_wavelength": [
+        null
+      ],
+      "_exptl_absorpt_coefficient_mu": [
+        null
+      ],
+      "_journal_issue": [
+        null
+      ],
+      "_journal_page_first": [
+        null
+      ],
+      "_journal_page_last": [
+        null
+      ],
+      "_journal_volume": [
+        null
+      ],
+      "_journal_year": [
+        null
+      ],
+      "_refine_ls_number_parameters": [
+        null
+      ],
+      "_refine_ls_number_reflns": [
+        null
+      ],
+      "_refine_ls_number_restraints": [
+        null
+      ],
+      "_space_group_IT_number": [
+        null
+      ]
+    },
+    "tags": [
+      "_publ_author_name",
+      "_publ_section_title",
+      "_journal_issue",
+      "_journal_name_full",
+      "_journal_page_first",
+      "_journal_page_last",
+      "_journal_paper_doi",
+      "_journal_volume",
+      "_journal_year",
+      "_chemical_formula_moiety",
+      "_chemical_formula_sum",
+      "_chemical_formula_weight",
+      "_chemical_name_common",
+      "_chemical_name_systematic",
+      "_space_group_IT_number",
+      "_symmetry_cell_setting",
+      "_symmetry_space_group_name_Hall",
+      "_symmetry_space_group_name_H-M",
+      "_cell_angle_alpha",
+      "_cell_angle_beta",
+      "_cell_angle_gamma",
+      "_cell_formula_units_Z",
+      "_cell_length_a",
+      "_cell_length_b",
+      "_cell_length_c",
+      "_cell_measurement_temperature",
+      "_cell_volume",
+      "_computing_structure_refinement",
+      "_diffrn_radiation_type",
+      "_diffrn_radiation_wavelength",
+      "_exptl_absorpt_coefficient_mu",
+      "_refine_ls_number_parameters",
+      "_refine_ls_number_reflns",
+      "_refine_ls_number_restraints",
+      "_cod_data_source_file",
+      "_cod_data_source_block",
+      "_cod_depositor_comments",
+      "_cod_original_sg_symbol_Hall",
+      "_cod_original_sg_symbol_H-M",
+      "_cod_database_code",
+      "_symmetry_equiv_pos_as_xyz",
+      "_atom_site_label",
+      "_atom_site_fract_x",
+      "_atom_site_fract_y",
+      "_atom_site_fract_z",
+      "_atom_site_U_iso_or_equiv",
+      "_atom_site_adp_type",
+      "_atom_site_occupancy",
+      "_atom_site_type_symbol",
+      "_atom_type_symbol",
+      "_atom_type_scat_dispersion_real",
+      "_atom_type_scat_dispersion_imag",
+      "_atom_type_scat_source",
+      "_cod_related_entry_id",
+      "_cod_related_entry_database",
+      "_cod_related_entry_code"
+    ],
+    "types": {
+      "_atom_site_U_iso_or_equiv": [
+        "FLOAT",
+        "FLOAT",
+        "FLOAT",
+        "FLOAT",
+        "FLOAT",
+        "FLOAT",
+        "FLOAT",
+        "FLOAT",
+        "FLOAT",
+        "FLOAT",
+        "FLOAT",
+        "FLOAT",
+        "FLOAT",
+        "FLOAT",
+        "FLOAT",
+        "FLOAT",
+        "FLOAT",
+        "FLOAT",
+        "FLOAT",
+        "FLOAT",
+        "FLOAT",
+        "FLOAT",
+        "FLOAT",
+        "FLOAT"
+      ],
+      "_atom_site_adp_type": [
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING"
+      ],
+      "_atom_site_fract_x": [
+        "FLOAT",
+        "FLOAT",
+        "FLOAT",
+        "FLOAT",
+        "FLOAT",
+        "FLOAT",
+        "FLOAT",
+        "FLOAT",
+        "FLOAT",
+        "FLOAT",
+        "FLOAT",
+        "FLOAT",
+        "FLOAT",
+        "FLOAT",
+        "FLOAT",
+        "FLOAT",
+        "FLOAT",
+        "FLOAT",
+        "FLOAT",
+        "FLOAT",
+        "FLOAT",
+        "FLOAT",
+        "FLOAT",
+        "FLOAT"
+      ],
+      "_atom_site_fract_y": [
+        "FLOAT",
+        "FLOAT",
+        "FLOAT",
+        "FLOAT",
+        "FLOAT",
+        "FLOAT",
+        "FLOAT",
+        "FLOAT",
+        "FLOAT",
+        "FLOAT",
+        "FLOAT",
+        "FLOAT",
+        "FLOAT",
+        "FLOAT",
+        "FLOAT",
+        "FLOAT",
+        "FLOAT",
+        "FLOAT",
+        "FLOAT",
+        "FLOAT",
+        "FLOAT",
+        "FLOAT",
+        "FLOAT",
+        "FLOAT"
+      ],
+      "_atom_site_fract_z": [
+        "FLOAT",
+        "FLOAT",
+        "FLOAT",
+        "FLOAT",
+        "FLOAT",
+        "FLOAT",
+        "FLOAT",
+        "FLOAT",
+        "FLOAT",
+        "FLOAT",
+        "FLOAT",
+        "FLOAT",
+        "FLOAT",
+        "FLOAT",
+        "FLOAT",
+        "FLOAT",
+        "FLOAT",
+        "FLOAT",
+        "FLOAT",
+        "FLOAT",
+        "FLOAT",
+        "FLOAT",
+        "FLOAT",
+        "FLOAT"
+      ],
+      "_atom_site_label": [
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING"
+      ],
+      "_atom_site_occupancy": [
+        "FLOAT",
+        "FLOAT",
+        "FLOAT",
+        "FLOAT",
+        "FLOAT",
+        "FLOAT",
+        "FLOAT",
+        "FLOAT",
+        "FLOAT",
+        "FLOAT",
+        "FLOAT",
+        "FLOAT",
+        "FLOAT",
+        "FLOAT",
+        "FLOAT",
+        "FLOAT",
+        "FLOAT",
+        "FLOAT",
+        "FLOAT",
+        "FLOAT",
+        "FLOAT",
+        "FLOAT",
+        "FLOAT",
+        "FLOAT"
+      ],
+      "_atom_site_type_symbol": [
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING"
+      ],
+      "_atom_type_scat_dispersion_imag": [
+        "FLOAT",
+        "FLOAT",
+        "FLOAT",
+        "FLOAT"
+      ],
+      "_atom_type_scat_dispersion_real": [
+        "FLOAT",
+        "FLOAT",
+        "FLOAT",
+        "FLOAT"
+      ],
+      "_atom_type_scat_source": [
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING"
+      ],
+      "_atom_type_symbol": [
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING"
+      ],
+      "_cell_angle_alpha": [
+        "FLOAT"
+      ],
+      "_cell_angle_beta": [
+        "FLOAT"
+      ],
+      "_cell_angle_gamma": [
+        "FLOAT"
+      ],
+      "_cell_formula_units_Z": [
+        "INT"
+      ],
+      "_cell_length_a": [
+        "FLOAT"
+      ],
+      "_cell_length_b": [
+        "FLOAT"
+      ],
+      "_cell_length_c": [
+        "FLOAT"
+      ],
+      "_cell_measurement_temperature": [
+        "INT"
+      ],
+      "_cell_volume": [
+        "FLOAT"
+      ],
+      "_chemical_formula_moiety": [
+        "SQSTRING"
+      ],
+      "_chemical_formula_sum": [
+        "SQSTRING"
+      ],
+      "_chemical_formula_weight": [
+        "FLOAT"
+      ],
+      "_chemical_name_common": [
+        "UQSTRING"
+      ],
+      "_chemical_name_systematic": [
+        "UQSTRING"
+      ],
+      "_cod_data_source_block": [
+        "UQSTRING"
+      ],
+      "_cod_data_source_file": [
+        "UQSTRING"
+      ],
+      "_cod_database_code": [
+        "INT"
+      ],
+      "_cod_depositor_comments": [
+        "TEXTFIELD"
+      ],
+      "_cod_original_sg_symbol_H-M": [
+        "SQSTRING"
+      ],
+      "_cod_original_sg_symbol_Hall": [
+        "SQSTRING"
+      ],
+      "_cod_related_entry_code": [
+        "INT",
+        "UQSTRING",
+        "INT"
+      ],
+      "_cod_related_entry_database": [
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING"
+      ],
+      "_cod_related_entry_id": [
+        "INT",
+        "INT",
+        "INT"
+      ],
+      "_computing_structure_refinement": [
+        "UQSTRING"
+      ],
+      "_diffrn_radiation_type": [
+        "SQSTRING"
+      ],
+      "_diffrn_radiation_wavelength": [
+        "FLOAT"
+      ],
+      "_exptl_absorpt_coefficient_mu": [
+        "FLOAT"
+      ],
+      "_journal_issue": [
+        "INT"
+      ],
+      "_journal_name_full": [
+        "SQSTRING"
+      ],
+      "_journal_page_first": [
+        "INT"
+      ],
+      "_journal_page_last": [
+        "INT"
+      ],
+      "_journal_paper_doi": [
+        "UQSTRING"
+      ],
+      "_journal_volume": [
+        "INT"
+      ],
+      "_journal_year": [
+        "INT"
+      ],
+      "_publ_author_name": [
+        "SQSTRING",
+        "SQSTRING",
+        "SQSTRING",
+        "SQSTRING",
+        "SQSTRING",
+        "SQSTRING",
+        "SQSTRING"
+      ],
+      "_publ_section_title": [
+        "TEXTFIELD"
+      ],
+      "_refine_ls_number_parameters": [
+        "INT"
+      ],
+      "_refine_ls_number_reflns": [
+        "INT"
+      ],
+      "_refine_ls_number_restraints": [
+        "INT"
+      ],
+      "_space_group_IT_number": [
+        "INT"
+      ],
+      "_symmetry_cell_setting": [
+        "UQSTRING"
+      ],
+      "_symmetry_equiv_pos_as_xyz": [
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING",
+        "UQSTRING"
+      ],
+      "_symmetry_space_group_name_H-M": [
+        "SQSTRING"
+      ],
+      "_symmetry_space_group_name_Hall": [
+        "SQSTRING"
+      ]
+    },
+    "values": {
+      "_atom_site_U_iso_or_equiv": [
+        "0.00000",
+        "0.00000",
+        "0.00000",
+        "0.00000",
+        "0.00000",
+        "0.00000",
+        "0.00000",
+        "0.00000",
+        "0.00000",
+        "0.00000",
+        "0.00000",
+        "0.00000",
+        "0.00000",
+        "0.00000",
+        "0.00000",
+        "0.00000",
+        "0.00000",
+        "0.00000",
+        "0.00000",
+        "0.00000",
+        "0.00000",
+        "0.00000",
+        "0.00000",
+        "0.00000"
+      ],
+      "_atom_site_adp_type": [
+        "Uiso",
+        "Uiso",
+        "Uiso",
+        "Uiso",
+        "Uiso",
+        "Uiso",
+        "Uiso",
+        "Uiso",
+        "Uiso",
+        "Uiso",
+        "Uiso",
+        "Uiso",
+        "Uiso",
+        "Uiso",
+        "Uiso",
+        "Uiso",
+        "Uiso",
+        "Uiso",
+        "Uiso",
+        "Uiso",
+        "Uiso",
+        "Uiso",
+        "Uiso",
+        "Uiso"
+      ],
+      "_atom_site_fract_x": [
+        "-0.06613",
+        "0.02779",
+        "0.11676",
+        "0.10866",
+        "0.18634",
+        "0.01159",
+        "-0.07738",
+        "-0.16212",
+        "-0.13793",
+        "0.01389",
+        "-0.08863",
+        "-0.25110",
+        "0.21968",
+        "0.00300",
+        "-0.12146",
+        "-0.27317",
+        "-0.28567",
+        "-0.26951",
+        "0.22513",
+        "0.27338",
+        "0.22878",
+        "0.03488",
+        "-0.07008",
+        "0.03791"
+      ],
+      "_atom_site_fract_y": [
+        "-0.06314",
+        "-0.05534",
+        "0.04116",
+        "0.12960",
+        "0.21385",
+        "0.12154",
+        "0.02504",
+        "0.01800",
+        "-0.16353",
+        "-0.15092",
+        "-0.21778",
+        "-0.20663",
+        "0.04971",
+        "0.21530",
+        "-0.29285",
+        "-0.19028",
+        "-0.28182",
+        "-0.17639",
+        "0.00926",
+        "0.12237",
+        "0.02315",
+        "0.24909",
+        "0.19602",
+        "0.26293"
+      ],
+      "_atom_site_fract_z": [
+        "0.09562",
+        "0.10000",
+        "0.08226",
+        "0.06000",
+        "0.04451",
+        "0.05547",
+        "0.07321",
+        "0.06926",
+        "0.11547",
+        "0.12255",
+        "0.13210",
+        "0.11847",
+        "0.08706",
+        "0.03186",
+        "0.14834",
+        "-0.00382",
+        "0.13462",
+        "0.22660",
+        "-0.01943",
+        "0.07281",
+        "0.21098",
+        "-0.09109",
+        "0.03170",
+        "0.13930"
+      ],
+      "_atom_site_label": [
+        "C5",
+        "C4",
+        "N3",
+        "C2",
+        "O11",
+        "N1",
+        "C6",
+        "O13",
+        "N7",
+        "N9",
+        "C8",
+        "C14",
+        "C12",
+        "C10",
+        "H8",
+        "H14a",
+        "H14b",
+        "H14c",
+        "H12a",
+        "H12b",
+        "H12c",
+        "H10a",
+        "H10b",
+        "H10c"
+      ],
+      "_atom_site_occupancy": [
+        "1.00000",
+        "1.00000",
+        "1.00000",
+        "1.00000",
+        "1.00000",
+        "1.00000",
+        "1.00000",
+        "1.00000",
+        "1.00000",
+        "1.00000",
+        "1.00000",
+        "1.00000",
+        "1.00000",
+        "1.00000",
+        "1.00000",
+        "1.00000",
+        "1.00000",
+        "1.00000",
+        "1.00000",
+        "1.00000",
+        "1.00000",
+        "1.00000",
+        "1.00000",
+        "1.00000"
+      ],
+      "_atom_site_type_symbol": [
+        "C",
+        "C",
+        "N",
+        "C",
+        "O",
+        "N",
+        "C",
+        "O",
+        "N",
+        "N",
+        "C",
+        "C",
+        "C",
+        "C",
+        "H",
+        "H",
+        "H",
+        "H",
+        "H",
+        "H",
+        "H",
+        "H",
+        "H",
+        "H"
+      ],
+      "_atom_type_scat_dispersion_imag": [
+        "0.00900",
+        "0.01800",
+        "0.03200",
+        "0.00000"
+      ],
+      "_atom_type_scat_dispersion_real": [
+        "0.01700",
+        "0.02900",
+        "0.04700",
+        "0.00000"
+      ],
+      "_atom_type_scat_source": [
+        "International_Tables_for_Crystallography_Vol.C(1991)_Tables_6.1.1.4_and_6.1.1.5",
+        "International_Tables_for_Crystallography_Vol.C(1991)_Tables_6.1.1.4_and_6.1.1.5",
+        "International_Tables_for_Crystallography_Vol.C(1991)_Tables_6.1.1.4_and_6.1.1.5",
+        "International_Tables_for_Crystallography_Vol.C(1991)_Tables_6.1.1.4_and_6.1.1.5"
+      ],
+      "_atom_type_symbol": [
+        "C",
+        "N",
+        "O",
+        "H"
+      ],
+      "_cell_angle_alpha": [
+        "90.00000"
+      ],
+      "_cell_angle_beta": [
+        "90.00000"
+      ],
+      "_cell_angle_gamma": [
+        "120.00000"
+      ],
+      "_cell_formula_units_Z": [
+        "6"
+      ],
+      "_cell_length_a": [
+        "14.9372(5)"
+      ],
+      "_cell_length_b": [
+        "14.9372(5)"
+      ],
+      "_cell_length_c": [
+        "6.8980(2)"
+      ],
+      "_cell_measurement_temperature": [
+        "278"
+      ],
+      "_cell_volume": [
+        "1332.88(7)"
+      ],
+      "_chemical_formula_moiety": [
+        "C8 H10 N4 O2"
+      ],
+      "_chemical_formula_sum": [
+        "C8 H10 N4 O2"
+      ],
+      "_chemical_formula_weight": [
+        "194.20"
+      ],
+      "_chemical_name_common": [
+        "caffeine"
+      ],
+      "_chemical_name_systematic": [
+        "1,3,7-Trimethylpurine-2,6-dione"
+      ],
+      "_cod_data_source_block": [
+        "caffeine"
+      ],
+      "_cod_data_source_file": [
+        "lc5020.cif"
+      ],
+      "_cod_database_code": [
+        "2100202"
+      ],
+      "_cod_depositor_comments": [
+        "\n Changing the values of the '_atom_type_symbol' data item to match those of\n the _atom_site_type_symbol data item.\n\n Antanas Vaitkus,\n 2017-11-14\n\n Updating the _chemical_name_systematic data item value.\n\n Antanas Vaitkus,\n 2017-11-14\n\nThe following automatic conversions were performed:\n'_symmetry_cell_setting' value 'Trigonal' changed to 'trigonal' according\nto '/home/saulius/struct/CIF-dictionaries/cif_core.dic' dictionary named\n'cif_core.dic' version 2.4.1 from 2010-06-29.\n\nAutomatic conversion script\nId: cif_fix_enum 1527 2010-12-29 10:47:43Z saulius \n\nThe following automatic conversions were performed:\n\n'_symmetry_cell_setting' value 'Trigonal' changed to 'trigonal'\naccording to /home/saulius/struct/CIF-dictionaries/cif_core.dic\ndictionary named 'cif_core.dic' version 2.4.1 from 2010-06-29.\n\nAutomatic conversion script\nId: cif_fix_values 1715 2011-07-08 13:25:40Z adriana "
+      ],
+      "_cod_original_sg_symbol_H-M": [
+        "R 3 c"
+      ],
+      "_cod_original_sg_symbol_Hall": [
+        "R 3 -2\"C"
+      ],
+      "_cod_related_entry_code": [
+        "2424",
+        "DB00201",
+        "2519"
+      ],
+      "_cod_related_entry_database": [
+        "ChemSpider",
+        "DrugBank",
+        "PubChem"
+      ],
+      "_cod_related_entry_id": [
+        "1",
+        "2",
+        "3"
+      ],
+      "_computing_structure_refinement": [
+        "FULLPROF"
+      ],
+      "_diffrn_radiation_type": [
+        "Cu K\\a"
+      ],
+      "_diffrn_radiation_wavelength": [
+        "1.54056"
+      ],
+      "_exptl_absorpt_coefficient_mu": [
+        "0.912"
+      ],
+      "_journal_issue": [
+        "3"
+      ],
+      "_journal_name_full": [
+        "Acta Crystallographica Section B"
+      ],
+      "_journal_page_first": [
+        "329"
+      ],
+      "_journal_page_last": [
+        "334"
+      ],
+      "_journal_paper_doi": [
+        "10.1107/S010876810500546X"
+      ],
+      "_journal_volume": [
+        "61"
+      ],
+      "_journal_year": [
+        "2005"
+      ],
+      "_publ_author_name": [
+        "Derollez, Patrick",
+        "Correia, Nat\\'alia T.",
+        "Dan\\`ede, Florence",
+        "Capet, Fr\\'ed\\'eric",
+        "Affouard, Fr\\'ed\\'eric",
+        "Lefebvre, Jacques",
+        "Descamps, Marc"
+      ],
+      "_publ_section_title": [
+        "\n <i>Ab initio</i> structure determination of the high-temperature phase\n of anhydrous caffeine by X-ray powder diffraction"
+      ],
+      "_refine_ls_number_parameters": [
+        "47"
+      ],
+      "_refine_ls_number_reflns": [
+        "222"
+      ],
+      "_refine_ls_number_restraints": [
+        "0"
+      ],
+      "_space_group_IT_number": [
+        "161"
+      ],
+      "_symmetry_cell_setting": [
+        "trigonal"
+      ],
+      "_symmetry_equiv_pos_as_xyz": [
+        "x,y,z",
+        "-y,x-y,z",
+        "-x+y,-x,z",
+        "-y,-x,z+1/2",
+        "-x+y,y,z+1/2",
+        "x,x-y,z+1/2",
+        "x+2/3,y+1/3,z+1/3",
+        "-y+2/3,x-y+1/3,z+1/3",
+        "-x+y+2/3,-x+1/3,z+1/3",
+        "-y+2/3,-x+1/3,z+5/6",
+        "-x+y+2/3,y+1/3,z+5/6",
+        "x+2/3,x-y+1/3,z+5/6",
+        "x+1/3,y+2/3,z+2/3",
+        "-y+1/3,x-y+2/3,z+2/3",
+        "-x+y+1/3,-x+2/3,z+2/3",
+        "-y+1/3,-x+2/3,z+1/6",
+        "-x+y+1/3,y+2/3,z+1/6",
+        "x+1/3,x-y+2/3,z+1/6"
+      ],
+      "_symmetry_space_group_name_H-M": [
+        "R 3 c :H"
+      ],
+      "_symmetry_space_group_name_Hall": [
+        "R 3 -2\"c"
+      ]
+    }
+  },
+  "version": "1.1"
+}
