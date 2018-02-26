@@ -18,7 +18,7 @@ _cell_volume volume
 _chemical_formula_sum formula
 _symmetry_space_group_name_H-M spacegroup
 _symmetry_space_group_name_Hall spacegrouphall
-_cod_database_code codnumber
+_cod_database_code codid
 '''.split()
 
 CIFDOCMAP = dict(zip(CIFDOCMAP[0::2], CIFDOCMAP[1::2]))
