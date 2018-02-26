@@ -1,9 +1,5 @@
 #!/usr/bin/env python3
 
-import json
-import pprint
-from elasticsearch import Elasticsearch
-
 
 CIFDOCMAP = '''
 _cell_length_a a
@@ -70,15 +66,3 @@ def cifdocument(codjson):
     # derived quantities
     rv['nformula'] = normalized_formula(rv['formula'])
     return rv
-
-
-jcif = json.load(open('standards/Ni-9008476.json'))
-doc = cifdocument(jcif)
-cid = cifid(jcif)
-
-if __name__ == '__main__':
-    es = Elasticsearch()
-    es.index(index='cod', doc_type='cif', id=cid, body=doc)
-    res = es.search(index="cod", body={"query": {"match_all": {}}})
-    print("Got %d Hits:" % res['hits']['total'])
-    pprint.pprint(res['hits'])
