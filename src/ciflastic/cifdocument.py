@@ -2,7 +2,6 @@
 
 import json
 import pprint
-from diffpy.pdfgetx.functs import composition_analysis
 from elasticsearch import Elasticsearch
 
 
@@ -44,6 +43,7 @@ def cifscalar(cifname):
 
 
 def normalized_formula(formula):
+    from diffpy.pdfgetx.functs import composition_analysis
     smbls, counts = composition_analysis(formula)
     totalcount = sum(counts)
     rv = dict.fromkeys(smbls, 0.0)
