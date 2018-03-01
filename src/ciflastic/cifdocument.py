@@ -76,5 +76,6 @@ def cifdocument(codjson):
         en = CIFDOCMAP[cn]
         rv[en] = evalue
     # derived quantities
-    rv['nformula'] = normalized_formula(rv['formula'])
+    if 'formula' in rv:
+        rv['composition'] = normalized_formula(rv['formula'])
     return rv
