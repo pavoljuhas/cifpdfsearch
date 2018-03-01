@@ -1,6 +1,9 @@
 #!/usr/bin/env python3
 
 
+from ciflastic._utils import tofloat, grouper
+
+
 CIFDOCMAP = '''
 _cell_length_a a
 _cell_length_b b
@@ -15,18 +18,27 @@ _symmetry_space_group_name_Hall spacegrouphall
 _cod_database_code codid
 '''.split()
 
-CIFDOCMAP = dict(zip(CIFDOCMAP[0::2], CIFDOCMAP[1::2]))
+CIFDOCMAP = dict(grouper(CIFDOCMAP, 2))
 
 CIFCONVERTERS = {
-    "INT" : int,
-    "FLOAT" : float,
+    "_cell_angle_alpha" : float,
+    "_cell_angle_beta" : float,
+    "_cell_angle_gamma" : float,
+    "INT" : float,
+    "FLOAT" : tofloat,
     "" : lambda x: x,
 }
 
 
-def getconverter(codtype):
-    f = CIFCONVERTERS.get(codtype, CIFCONVERTERS[''])
-    return f
+def getconverter(codjson, cifname):
+    def _candidates():
+        yield CIFCONVERTERS.get(cifname)
+        codtypes = codjson['data']['types']
+        tp = codtypes.get(cifname, ("",))[0]
+        yield CIFCONVERTERS.get(tp)
+        yield CIFCONVERTERS[""]
+    fcnv = next(f for f in _candidates() if f is not None)
+    return fcnv
 
 
 def cifid(codjson):
@@ -55,13 +67,13 @@ def cifdocument(codjson):
     Create document from JSON record from cif2json utility.
     """
     codvalues = codjson['data']['values']
-    codtypes = codjson['data']['types']
+    cifnames = set(CIFDOCMAP).intersection(codvalues)
     rv = {}
-    for cn, en in CIFDOCMAP.items():
-        tps = codtypes[cn]
-        vals = codvalues[cn]
-        gen = (getconverter(tp)(x) for tp, x in zip(tps, vals))
-        evalue = next(gen) if cifscalar(cn) else list(gen)
+    for cn in cifnames:
+        fcnv = getconverter(codjson, cn)
+        genval = (fcnv(x) for x in codvalues[cn])
+        evalue = next(genval) if cifscalar(cn) else list(genval)
+        en = CIFDOCMAP[cn]
         rv[en] = evalue
     # derived quantities
     rv['nformula'] = normalized_formula(rv['formula'])
