@@ -22,5 +22,5 @@ def cfpath(basename):
     return os.path.join(_DATADIR, basename)
 
 
-_MYDIR = os.path.abspath(os.path.dirname(__file__))
+_MYDIR = os.path.abspath(__path__[0])
 _DATADIR = os.path.normpath(os.path.join(_MYDIR, '../../standards'))
