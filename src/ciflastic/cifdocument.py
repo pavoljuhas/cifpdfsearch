@@ -78,4 +78,5 @@ def cifdocument(codjson):
     # derived quantities
     if 'formula' in rv:
         rv['composition'] = normalized_formula(rv['formula'])
+        rv['nel'] = len(rv['composition'])
     return rv
