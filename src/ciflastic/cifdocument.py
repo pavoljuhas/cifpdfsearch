@@ -13,6 +13,7 @@ _cell_angle_beta beta
 _cell_angle_gamma gamma
 _cell_volume volume
 _chemical_formula_sum formula
+_chemical_name_mineral mineralname
 _symmetry_space_group_name_H-M spacegroup
 _symmetry_space_group_name_Hall spacegrouphall
 _cod_database_code codid
