@@ -119,7 +119,6 @@ def safecall(f, default=None):
     def wrapper(*args, **kwds):
         signature = args + tuple(sorted(kwds.items()))
         if _last and _last['signature'] == signature:
-            print('foo')
             return _last['value']
         rv = default
         try:
