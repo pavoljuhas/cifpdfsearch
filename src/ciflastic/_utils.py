@@ -6,12 +6,17 @@
 import sys
 
 
-def grouper(iterable, n, fillvalue=None):
+def grouper(iterable, n, *fillvalue):
     "Collect data into fixed-length chunks or blocks"
     # grouper('ABCDEFG', 3, 'x') --> ABC DEF Gxx"
-    from itertools import zip_longest
-    args = [iter(iterable)] * n
-    return zip_longest(*args, fillvalue=fillvalue)
+    from itertools import islice, cycle
+    ii = iter(iterable)
+    for x in ii:
+        grp = (x,) + tuple(islice(ii, n - 1))
+        if fillvalue and len(grp) < n:
+            grp += (n - len(grp)) * (fillvalue[0],)
+        yield grp
+    pass
 
 
 def tofloat(s):
