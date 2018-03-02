@@ -22,10 +22,10 @@ _cod_database_code codid
 CIFDOCMAP = dict(grouper(CIFDOCMAP, 2))
 
 CIFCONVERTERS = {
-    "_cell_angle_alpha" : float,
-    "_cell_angle_beta" : float,
-    "_cell_angle_gamma" : float,
-    "INT" : float,
+    "_cell_angle_alpha" : tofloat,
+    "_cell_angle_beta" : tofloat,
+    "_cell_angle_gamma" : tofloat,
+    "INT" : tofloat,
     "FLOAT" : tofloat,
     "" : lambda x: x,
 }
