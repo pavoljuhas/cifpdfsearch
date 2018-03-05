@@ -25,6 +25,7 @@ CIFCONVERTERS = {
     "_cell_angle_alpha" : tofloat,
     "_cell_angle_beta" : tofloat,
     "_cell_angle_gamma" : tofloat,
+    "_cell_volume" : tofloat,
     "INT" : tofloat,
     "FLOAT" : tofloat,
     "" : lambda x: x,
