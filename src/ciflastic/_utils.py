@@ -9,7 +9,7 @@ import sys
 def grouper(iterable, n, *fillvalue):
     "Collect data into fixed-length chunks or blocks"
     # grouper('ABCDEFG', 3, 'x') --> ABC DEF Gxx"
-    from itertools import islice, cycle
+    from itertools import islice
     ii = iter(iterable)
     for x in ii:
         grp = (x,) + tuple(islice(ii, n - 1))
