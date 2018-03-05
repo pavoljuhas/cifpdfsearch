@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 
-from ciflastic._utils import tofloat, grouper
+from ciflastic._utils import tofloat, grouper, safecall
 
 
 CIFDOCMAP = '''
@@ -70,6 +70,7 @@ def cifdocument(codjson):
     """
     codvalues = codjson['data']['values']
     cifnames = set(CIFDOCMAP).intersection(codvalues)
+    getcomposition = safecall(normalized_formula)
     rv = {}
     for cn in cifnames:
         fcnv = getconverter(codjson, cn)
@@ -78,7 +79,8 @@ def cifdocument(codjson):
         en = CIFDOCMAP[cn]
         rv[en] = evalue
     # derived quantities
-    if 'formula' in rv:
-        rv['composition'] = normalized_formula(rv['formula'])
+    formula = rv.get('formula', 'xxx-fail-xxx')
+    if getcomposition(formula):
+        rv['composition'] = getcomposition(formula)
         rv['nel'] = len(rv['composition'])
     return rv
