@@ -108,3 +108,24 @@ def genjson(fp=None, filename=None, bufsize=262144, maxbufsize=None):
         buf = buf[i:].lstrip()
         yield jobj
     return
+
+
+def safecall(f, default=None):
+    """Function wrapper that returns fallback value on exception.
+    """
+    from functools import wraps
+    _last = {}
+    @wraps(f)
+    def wrapper(*args, **kwds):
+        signature = args + tuple(sorted(kwds.items()))
+        if _last and _last['signature'] == signature:
+            print('foo')
+            return _last['value']
+        rv = default
+        try:
+            rv = f(*args, **kwds)
+            _last.update(signature=signature, value=rv)
+        except (ValueError, TypeError):
+            pass
+        return rv
+    return wrapper
