@@ -18,10 +18,10 @@ def jload(filename):
 
 
 def cfpath(basename):
-    """Return absolute path to standard files included in ciflastic.
+    """Return absolute path to data files root in ciflastic.
     """
     return os.path.join(_DATADIR, basename)
 
 
 _MYDIR = os.path.abspath(__path__[0])
-_DATADIR = os.path.normpath(os.path.join(_MYDIR, '../../standards'))
+_DATADIR = os.path.normpath(os.path.join(_MYDIR, '../..'))

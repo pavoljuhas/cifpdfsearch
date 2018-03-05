@@ -10,7 +10,7 @@ from ciflastic import jload, cfpath, cifdocument, cifid
 INDEX = 'codtest'
 es = Elasticsearch()
 
-cif = cfpath('Ni-9008476.json')
+cif = cfpath('standards/Ni-9008476.json')
 jcif = jload(cif)
 cdoc = cifdocument(jcif)
 cid = cifid(jcif)
