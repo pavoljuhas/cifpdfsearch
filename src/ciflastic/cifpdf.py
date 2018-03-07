@@ -65,6 +65,8 @@ class Calculator:
         cfg['envelopes'] = list(calc.usedenvelopetypes)
         for n in calc._namesOfWritableDoubleAttributes():
             cfg[n] = getattr(calc, n)
+        if cfg['peakwidthmodel'] == 'constant':
+            cfg['uisowidth'] = fwhmtouiso(cfg['width'])
         return cfg
 
 # end of class Calculator
