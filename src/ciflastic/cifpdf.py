@@ -7,7 +7,7 @@ Tools for bulk calculation of pair distribution functions from COD entries.
 
 import logging
 import numbers
-import numpy
+import math
 
 # ----------------------------------------------------------------------------
 
@@ -71,7 +71,7 @@ class Calculator:
 
 # Helper functions -----------------------------------------------------------
 
-_GAUSS_SIGMA_TO_FWHM = 2 * numpy.sqrt(2 * numpy.log(2))
+_GAUSS_SIGMA_TO_FWHM = 2 * math.sqrt(2 * math.log(2))
 
 def uisotofwhm(uiso):
     """Return FWHM for a pair of atoms with equal Uiso displacements.
