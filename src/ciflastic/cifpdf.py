@@ -24,6 +24,7 @@ class Calculator:
         calc = klass()
         # version
         calculatorversion = mycfg.pop('calculatorversion', {})
+        assert calculatorversion is not None
         # translate derived quantities
         if 'uisowidth' in mycfg:
             mycfg['width'] = uisotofwhm(mycfg.pop('uisowidth'))
@@ -39,6 +40,32 @@ class Calculator:
             unused = ', '.join(mycfg)
             logging.debug('unused configuration items %s', unused)
         return calc
+
+
+    @staticmethod
+    def toConfig(calc):
+        '''Return configuration dictionary for PDF calculator object.
+        '''
+        from diffpy.srreal import version as ver
+        typedattrs = ['baseline', 'peakprofile',
+                      'peakwidthmodel', 'scatteringfactortable']
+        cfg = {}
+        calculatorclass = type(calc).__name__
+        if not calculatorclass in ('PDFCalculator', 'DebyePDFCalculator'):
+            emsg = "Invalid calculator type {}".format(type(calc))
+            raise TypeError(emsg)
+        cfg['calculatorclass'] = calculatorclass
+        cfg['calculatorversion'] = dict([
+            ('diffpy.srreal', ver.__version__),
+            ('libdiffpy', ver.libdiffpy_version_info.version),
+        ])
+        tpattrs = [n for n in typedattrs if hasattr(calc, n)]
+        tptypes = [getattr(calc, n).type() for n in tpattrs]
+        cfg.update(zip(tpattrs, tptypes))
+        cfg['envelopes'] = list(calc.usedenvelopetypes)
+        for n in calc._namesOfWritableDoubleAttributes():
+            cfg[n] = getattr(calc, n)
+        return cfg
 
 # end of class Calculator
 
