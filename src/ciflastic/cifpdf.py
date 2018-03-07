@@ -24,6 +24,9 @@ class Calculator:
         calc = klass()
         # version
         calculatorversion = mycfg.pop('calculatorversion', {})
+        # translate derived quantities
+        if 'uisowidth' in mycfg:
+            mycfg['width'] = uisotofwhm(mycfg.pop('uisowidth'))
         # configure contained objects
         subobjs = [(n, v) for n, v in mycfg.items()
                    if n == 'envelopes' or isinstance(v, str)]
