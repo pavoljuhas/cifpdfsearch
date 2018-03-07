@@ -7,7 +7,9 @@ Tools for bulk calculation of pair distribution functions from COD entries.
 
 import logging
 import numbers
+import numpy
 
+# ----------------------------------------------------------------------------
 
 class Calculator:
 
@@ -36,3 +38,47 @@ class Calculator:
         return calc
 
 # end of class Calculator
+
+# Helper functions -----------------------------------------------------------
+
+_GAUSS_SIGMA_TO_FWHM = 2 * numpy.sqrt(2 * numpy.log(2))
+
+def uisotofwhm(uiso):
+    """Return FWHM for a pair of atoms with equal Uiso displacements.
+
+    Full width at half maximum of a Gaussian in radial distribution function.
+
+    Parameters
+    ----------
+    uiso : float
+        The isotropic displacement parameter in A**2 for every atom site.
+
+    Returns
+    -------
+    fwhm : float
+        Full width at half maximum in A.
+    """
+    fwhm = _GAUSS_SIGMA_TO_FWHM * ((2 * uiso) ** 0.5)
+    return fwhm
+
+
+def fwhmtouiso(fwhm):
+    """Return uniform displacement parameter corresponding to FWHM.
+
+    Calculate isotropic displacements that would produce Gaussian peak
+    of the specified full width at half maximum.
+
+    Parameters
+    ----------
+    fwhm : float
+        Full width at half maximum of a Gaussian peak in A.
+
+
+    Returns
+    -------
+    uiso : float
+        The uniform isotropic displacement parameter in A**2.
+    """
+    rmsd = fwhm / _GAUSS_SIGMA_TO_FWHM
+    uiso = 0.5 * rmsd ** 2
+    return uiso
