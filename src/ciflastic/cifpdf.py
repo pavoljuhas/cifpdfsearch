@@ -6,25 +6,27 @@ Tools for bulk calculation of pair distribution functions from COD entries.
 
 
 import logging
-import numbers
 import math
 
 # ----------------------------------------------------------------------------
 
 class calculator:
 
-    @staticmethod
-    def fromConfig(cfg):
+    _exclude = set(('slope',))
+
+    @classmethod
+    def fromConfig(cls, cfg):
         '''Create PDF calculator object from configuration dictionary.
         '''
         from diffpy.srreal import pdfcalculator
+        from numbers import Number
         mycfg = cfg.copy()
-        calculatorclass = mycfg.pop('calculatorclass')
-        klass = getattr(pdfcalculator, calculatorclass)
+        classname = mycfg.pop('class')
+        klass = getattr(pdfcalculator, classname)
         calc = klass()
         # version
-        calculatorversion = mycfg.pop('calculatorversion', {})
-        assert calculatorversion is not None
+        cversion = mycfg.pop('version', {})
+        assert cversion is not None
         # translate derived quantities
         if 'uisowidth' in mycfg:
             mycfg['width'] = uisotofwhm(mycfg.pop('uisowidth'))
@@ -32,7 +34,7 @@ class calculator:
         subobjs = [(n, v) for n, v in mycfg.items()
                    if n == 'envelopes' or isinstance(v, str)]
         dbattrs = [(n, v) for n, v in mycfg.items()
-                   if isinstance(v, numbers.Number)]
+                   if isinstance(v, Number) and not n in cls._exclude]
         for n, v in subobjs + dbattrs:
             setattr(calc, n, v)
             mycfg.pop(n)
@@ -42,20 +44,20 @@ class calculator:
         return calc
 
 
-    @staticmethod
-    def toConfig(calc):
+    @classmethod
+    def toConfig(cls, calc):
         '''Return configuration dictionary for PDF calculator object.
         '''
         from diffpy.srreal import version as ver
         typedattrs = ['baseline', 'peakprofile',
                       'peakwidthmodel', 'scatteringfactortable']
         cfg = {}
-        calculatorclass = type(calc).__name__
-        if not calculatorclass in ('PDFCalculator', 'DebyePDFCalculator'):
+        classname = type(calc).__name__
+        if not classname in ('PDFCalculator', 'DebyePDFCalculator'):
             emsg = "Invalid calculator type {}".format(type(calc))
             raise TypeError(emsg)
-        cfg['calculatorclass'] = calculatorclass
-        cfg['calculatorversion'] = dict([
+        cfg['class'] = classname
+        cfg['version'] = dict([
             ('diffpy.srreal', ver.__version__),
             ('libdiffpy', ver.libdiffpy_version_info.version),
         ])
@@ -63,7 +65,10 @@ class calculator:
         tptypes = [getattr(calc, n).type() for n in tpattrs]
         cfg.update(zip(tpattrs, tptypes))
         cfg['envelopes'] = list(calc.usedenvelopetypes)
-        for n in calc._namesOfWritableDoubleAttributes():
+        cfg['evaluatortype'] = calc.evaluatortype
+        dbattrs = (n for n in calc._namesOfWritableDoubleAttributes()
+                   if not n in cls._exclude)
+        for n in dbattrs:
             cfg[n] = getattr(calc, n)
         if cfg['peakwidthmodel'] == 'constant':
             cfg['uisowidth'] = fwhmtouiso(cfg['width'])
