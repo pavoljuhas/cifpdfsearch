@@ -11,7 +11,7 @@ import math
 
 # ----------------------------------------------------------------------------
 
-class Calculator:
+class calculator:
 
     @staticmethod
     def fromConfig(cfg):
@@ -69,7 +69,7 @@ class Calculator:
             cfg['uisowidth'] = fwhmtouiso(cfg['width'])
         return cfg
 
-# end of class Calculator
+# end of class calculator
 
 # Helper functions -----------------------------------------------------------
 
