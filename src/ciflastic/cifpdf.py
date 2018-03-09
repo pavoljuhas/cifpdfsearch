@@ -5,6 +5,7 @@ Tools for bulk calculation of pair distribution functions from COD entries.
 '''
 
 
+import os.path
 import logging
 import math
 
@@ -75,6 +76,56 @@ class calculator:
         return cfg
 
 # end of class calculator
+
+# ----------------------------------------------------------------------------
+
+class HDFStorage:
+
+    _dsrgridpath = 'common/rgrid'
+    _dspdfpath = 'pdfc/cod{:0>7}'
+
+    def __init__(self, filename, mode=None):
+        from h5py import File
+        self.filename = os.path.abspath(filename)
+        self.hfile = File(filename, mode=mode)
+        self._rgrid = None
+        return
+
+
+    def writeConfig(self, calc):
+        from ciflastic._utils import h5writejson
+        group = self.hfile.require_group('config/pdfcalculator')
+        cfg = calculator.toConfig(calc)
+        h5writejson(group, cfg)
+        return
+
+
+    def writePDF(self, codid, r, g):
+        if not self._dsrgridpath in self.hfile:
+            self.hfile[self._dsrgridpath] = r
+        # TODO replace with normcodid
+        scid = str(codid)
+        dsname = self._dspdfpath.format(scid)
+        ds = self.hfile.require_dataset(dsname, shape=g.shape, dtype=float)
+        ds[:] = g
+        return
+
+
+    def readPDF(self, codid):
+        # TODO replace with normcodid
+        scid = str(codid)
+        dsname = self._dspdfpath.format(scid)
+        rv = (self.rgrid, self.hfile[dsname].value)
+        return rv
+
+
+    @property
+    def rgrid(self):
+        if self._rgrid == None:
+            self._rgrid = self.hfile[self._dsrgridpath][:]
+        return self._rgrid
+
+# end of class HDFStorage
 
 # Helper functions -----------------------------------------------------------
 
