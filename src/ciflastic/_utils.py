@@ -130,6 +130,40 @@ def safecall(f, default=None):
     return wrapper
 
 
+def h5writejson(group, cfg):
+    """Write json-like object into a given HDF5 group.
+
+    Create an equivalent hierarchy of HDF5 Group objects
+    anchored in the `group`.  The types of collection objects
+    are saved in the "type" attribute of HDF5 groups.
+
+    Parameters
+    ----------
+    group : h5py.Group
+        The HDF5 group object where to write the json-like object.
+    cfg : dict, list, tuple
+        The JSON-like hierarchical object to be saved.
+    """
+    from numpy import string_
+    from itertools import accumulate
+    from operator import getitem
+    def _assign_type(gtop, gpath):
+        if 'type' in gtop.attrs:
+            return
+        owners = list(accumulate((cfg,) + gpath, getitem))
+        for owner in reversed(owners):
+            gtop.attrs['type'] = string_(type(owner).__name__)
+            gtop = gtop.parent
+            if 'type' in gtop.attrs:
+                break
+        return
+    for path, value in walkjson(cfg):
+        dname = '/'.join(str(p) for p in path)
+        group[dname] = value
+        _assign_type(group[dname].parent, path[:-1])
+    return
+
+
 def walkjson(obj):
     """Generate index-paths and values from a json-like hierarchy.
 
