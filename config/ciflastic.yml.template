@@ -1,3 +1,26 @@
 # Base directory for the Crystallography Open Database
 
 coddir: ~/research/datasets/cod
+
+# Path to PDF storage
+
+pdfstorage: ~/.cache/ciflastic/codpdfs.h5
+
+# PDF calculation setup
+
+pdfcalculator:
+  class: PDFCalculator
+  evaluatortype: BASIC
+  scatteringfactortable: xray
+  peakprofile: gaussian
+  peakwidthmodel: constant
+  envelopes:
+    - scale
+  baseline: linear
+  qmin: 0.0
+  qmax: 999
+  rmin: 0.0
+  rmax: 50.0
+  rstep: 0.01
+  scale: 1.0
+  uisowidth: 0.004

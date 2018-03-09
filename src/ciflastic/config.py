@@ -15,6 +15,8 @@ CODDIR : str
 
 
 CODDIR = ''
+PDFSTORAGE = ''
+PDFCALCULATOR = {}
 
 
 def initialize(cfgfile=None):
@@ -29,9 +31,13 @@ def initialize(cfgfile=None):
             warn(wmsg)
             return
     global CODDIR
+    global PDFSTORAGE
     with open(cfgfile) as fp:
         cfg = yaml.load(fp)
     CODDIR = abspath(expanduser(cfg['coddir']))
+    PDFSTORAGE = abspath(expanduser(cfg.get('pdfstorage', '')))
+    PDFCALCULATOR.clear()
+    PDFCALCULATOR.update(cfg.get('pdfcalculator', {}))
     return
 
 
