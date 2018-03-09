@@ -5,12 +5,12 @@
 
 from pprint import pprint
 from elasticsearch import Elasticsearch
-from ciflastic import jload, cfpath, cifdocument, cifid
+from ciflastic import jload, datapath, cifdocument, cifid
 
 INDEX = 'codtest'
 es = Elasticsearch()
 
-cif = cfpath('standards/Ni-9008476.json')
+cif = datapath('standards/Ni-9008476.json')
 jcif = jload(cif)
 cdoc = cifdocument(jcif)
 cid = cifid(jcif)

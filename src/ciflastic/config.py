@@ -21,9 +21,9 @@ def initialize(cfgfile=None):
     from warnings import warn
     from os.path import isfile, expanduser, abspath
     import archieml
-    from ciflastic import cfpath
+    from ciflastic import datapath
     if cfgfile is None:
-        cfgfile = cfpath('config/ciflastic.aml')
+        cfgfile = datapath('config/ciflastic.aml')
         if not isfile(cfgfile):
             wmsg = "Cannot open default configuration file {}".format(cfgfile)
             warn(wmsg)

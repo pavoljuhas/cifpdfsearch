@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 __all__ = ['cifid', 'cifdocument', 'genjson', 'walkjson',
-           'jload', 'cfpath', 'cifpath']
+           'jload', 'datapath', 'cifpath']
 
 import json
 import os.path
@@ -18,7 +18,7 @@ def jload(filename):
     return rv
 
 
-def cfpath(basename):
+def datapath(basename):
     """Return absolute path to data files root in ciflastic.
     """
     return os.path.join(_DATADIR, basename)

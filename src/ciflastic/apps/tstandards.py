@@ -6,12 +6,12 @@
 import glob
 from pprint import pprint
 from elasticsearch import Elasticsearch, helpers
-from ciflastic import jload, cfpath, cifdocument, cifid
+from ciflastic import jload, datapath, cifdocument, cifid
 
 INDEX = 'codtest'
 es = Elasticsearch()
 
-cifs = glob.glob(cfpath('standards/*.json'))
+cifs = glob.glob(datapath('standards/*.json'))
 actions = (dict(_index=INDEX, _id=cifid(jc), _type='cif',
                 _source=cifdocument(jc))
            for jc in map(jload, cifs))
