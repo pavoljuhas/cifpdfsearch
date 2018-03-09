@@ -72,7 +72,7 @@ class calculator:
         for n in dbattrs:
             cfg[n] = getattr(calc, n)
         if cfg['peakwidthmodel'] == 'constant':
-            cfg['uisowidth'] = fwhmtouiso(cfg['width'])
+            cfg['uisowidth'] = fwhmtouiso(cfg.pop('width'))
         return cfg
 
 # end of class calculator
