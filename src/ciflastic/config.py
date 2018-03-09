@@ -4,7 +4,7 @@
 This modules provides constants and paths for local installation.
 
 The recommended way to change these constants is to copy
-"config/ciflastic.aml.template" to "config/ciflastic.aml"
+"config/ciflastic.yml.template" to "config/ciflastic.aml"
 and edit the site settings as needed.
 
 Attributes
@@ -20,17 +20,17 @@ CODDIR = ''
 def initialize(cfgfile=None):
     from warnings import warn
     from os.path import isfile, expanduser, abspath
-    import archieml
+    import yaml
     from ciflastic import datapath
     if cfgfile is None:
-        cfgfile = datapath('config/ciflastic.aml')
+        cfgfile = datapath('config/ciflastic.yml')
         if not isfile(cfgfile):
             wmsg = "Cannot open default configuration file {}".format(cfgfile)
             warn(wmsg)
             return
     global CODDIR
     with open(cfgfile) as fp:
-        cfg = archieml.load(fp)
+        cfg = yaml.load(fp)
     CODDIR = abspath(expanduser(cfg['coddir']))
     return
 

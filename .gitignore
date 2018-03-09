@@ -107,4 +107,4 @@ venv.bak/
 # ciflastic project additions ------------------------------------------------
 errors.err
 tags
-/config/ciflastic.aml
+/config/ciflastic.yml
