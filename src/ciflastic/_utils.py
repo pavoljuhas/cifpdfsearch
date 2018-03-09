@@ -128,3 +128,39 @@ def safecall(f, default=None):
             pass
         return rv
     return wrapper
+
+
+def walkjson(obj):
+    """Generate index-paths and values from a json-like hierarchy.
+
+    Parameters
+    ----------
+    obj : dict, list, tuple or other object
+
+    Yields
+    ------
+    tuple
+        A tuple of (indexpath, value), where `indexpath` is a sequence
+        of indices which return `value` when applied to the `obj`.
+        The `indexpath` is an empty tuple when walking scalar object.
+    """
+    return _walkjsonpath(obj, path=())
+
+
+def _walkjsonpath(obj, path):
+    "Implementation of walkjson"
+    if isinstance(obj, (list, tuple)):
+        gen = enumerate(obj)
+    elif isinstance(obj, dict):
+        gen = obj.items()
+    else:
+        yield obj, path
+        return
+    for key, value in gen:
+        p1 = path + (key,)
+        if isinstance(value, (list, dict, tuple)):
+            for x in _walkjsonpath(value, path=p1):
+                yield x
+        else:
+            yield p1, value
+    return

@@ -1,12 +1,13 @@
 #!/usr/bin/env python3
 
-__all__ = ['cifid', 'cifdocument', 'genjson', 'jload', 'cfpath']
+__all__ = ['cifid', 'cifdocument', 'genjson', 'walkjson',
+           'jload', 'cfpath', 'cifpath']
 
 import json
 import os.path
 
 from ciflastic.cifdocument import cifid, cifdocument
-from ciflastic._utils import genjson
+from ciflastic._utils import genjson, walkjson
 
 
 def jload(filename):
