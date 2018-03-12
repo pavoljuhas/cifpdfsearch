@@ -83,6 +83,7 @@ class HDFStorage:
 
     _dsrgridpath = 'common/rgrid'
     _dspdfpath = 'pdfc/cod{:0>7}'
+    dtype = 'float32'
 
     def __init__(self, filename, mode=None):
         from h5py import File
@@ -102,11 +103,13 @@ class HDFStorage:
 
     def writePDF(self, codid, r, g):
         if not self._dsrgridpath in self.hfile:
-            self.hfile[self._dsrgridpath] = r
+            rds = self.hfile.require_dataset(
+                self._dsrgridpath, shape=r.shape, dtype=self.dtype)
+            rds[:] = r
         # TODO replace with normcodid
         scid = str(codid)
-        dsname = self._dspdfpath.format(scid)
-        ds = self.hfile.require_dataset(dsname, shape=g.shape, dtype=float)
+        nm = self._dspdfpath.format(scid)
+        ds = self.hfile.require_dataset(nm, shape=g.shape, dtype=self.dtype)
         ds[:] = g
         return
 
