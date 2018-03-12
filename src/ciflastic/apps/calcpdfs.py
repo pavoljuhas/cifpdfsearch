@@ -25,9 +25,9 @@ def main(ciflist):
         open(out, 'w').close()
         try:
             crst = loadCrystal(cf)
-        except:
+            r, g = pdfc(crst)
+        except ValueError:
             continue
-        r, g = pdfc(crst)
         numpy.save(out, g.astype(numpy.float32))
     return
 
