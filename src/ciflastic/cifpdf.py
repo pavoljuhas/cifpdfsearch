@@ -124,7 +124,7 @@ class HDFStorage:
 
     @property
     def rgrid(self):
-        if self._rgrid == None:
+        if self._rgrid is None:
             self._rgrid = self.hfile[self._dsrgridpath][:]
         return self._rgrid
 
