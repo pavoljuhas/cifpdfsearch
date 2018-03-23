@@ -47,6 +47,44 @@ def tofloat(s):
     return rv
 
 
+def normcodid(codid):
+    """Return COD identifier as 7-digit string.
+
+    Parameters
+    ----------
+    codid : int or str
+        COD database code for the CIF file.  When `str` use the
+        last sequence of exactly 7 digits.
+
+    Returns
+    -------
+    str
+        Absolute path to the CIF file.
+
+    Raises
+    ------
+    ValueError
+        When codid has invalid range.
+    TypeError
+        When codid is of unsupported type.
+    """
+    if isinstance(codid, int):
+        if not 1000000 <= codid <= 9999999:
+            raise ValueError('codid must be a 7-digit integer')
+        scid = str(codid)
+    elif isinstance(codid, str):
+        scid = codid
+        if len(codid) != 7 or not codid.isdigit():
+            s1 = ''.join(c if c.isdigit() else ' ' for c in codid)
+            segs = [w for w in s1.split() if len(w) == 7]
+            if not segs:
+                emsg = 'Could not find 7-digit segment in {}'.format(codid)
+                raise ValueError(emsg)
+            scid = segs[-1]
+    assert len(scid) == 7
+    return scid
+
+
 def genjson(fp=None, filename=None, bufsize=262144, maxbufsize=None):
     """Generate JSON entries from a file-like object.
 

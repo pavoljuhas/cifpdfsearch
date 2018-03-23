@@ -7,7 +7,7 @@ import json
 import os.path
 
 from ciflastic.cifdocument import cifid, cifdocument
-from ciflastic._utils import genjson, walkjson
+from ciflastic._utils import genjson, walkjson, normcodid
 
 
 def jload(filename):
@@ -42,22 +42,11 @@ def cifpath(codid):
     ------
     ValueError
         When codid has invalid range.
+    TypeError
+        When codid is of unsupported type.
     """
     from ciflastic.config import CODDIR
-    if isinstance(codid, int):
-        if not 1000000 <= codid <= 9999999:
-            raise ValueError('codid must be a 7-digit integer')
-        scid = str(codid)
-    elif len(codid) == 7 and codid.isdigit():
-        scid = codid
-    else:
-        s1 = ''.join(c if c.isdigit() else ' ' for c in codid)
-        segs = [w for w in s1.split() if len(w) == 7]
-        if not segs:
-            emsg = 'Could not find 7-digit segment in {}'.format(codid)
-            raise ValueError(emsg)
-        scid = segs[-1]
-    assert len(scid) == 7
+    scid = normcodid(codid)
     parts = ['cif', scid[0], scid[1:3], scid[3:5], scid + '.cif']
     rv = os.path.join(CODDIR, *parts)
     return rv
