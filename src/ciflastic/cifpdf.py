@@ -9,6 +9,8 @@ import os.path
 import logging
 import math
 
+from ciflastic import normcodid
+
 # ----------------------------------------------------------------------------
 
 class calculator:
@@ -106,8 +108,7 @@ class HDFStorage:
             rds = self.hfile.require_dataset(
                 self._dsrgridpath, shape=r.shape, dtype=self.dtype)
             rds[:] = r
-        # TODO replace with normcodid
-        scid = str(codid)
+        scid = normcodid(codid)
         nm = self._dspdfpath.format(scid)
         ds = self.hfile.require_dataset(nm, shape=g.shape, dtype=self.dtype)
         ds[:] = g
@@ -115,8 +116,7 @@ class HDFStorage:
 
 
     def readPDF(self, codid):
-        # TODO replace with normcodid
-        scid = str(codid)
+        scid = normcodid(codid)
         dsname = self._dspdfpath.format(scid)
         rv = (self.rgrid, self.hfile[dsname].value)
         return rv
