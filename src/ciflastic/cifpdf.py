@@ -113,10 +113,10 @@ class HDFStorage:
 
 
     def writePDF(self, codid, r, g):
-        if not self._dsrgridpath in self.hfile:
-            rds = self.hfile.require_dataset(
-                self._dsrgridpath, shape=r.shape, dtype=self.dtype)
-            rds[:] = r
+        from numpy import allclose
+        if r.shape != self.rgrid.shape or not allclose(r, self.rgrid):
+            emsg = "r must equal the {} dataset".format(self._dsrgridpath)
+            raise ValueError(emsg)
         scid = normcodid(codid)
         nm = self._dspdfpath.format(scid)
         ds = self.hfile.require_dataset(nm, shape=g.shape, dtype=self.dtype)
