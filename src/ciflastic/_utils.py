@@ -53,8 +53,7 @@ def normcodid(codid):
     Parameters
     ----------
     codid : int or str
-        COD database code for the CIF file.  When `str` use the
-        last sequence of exactly 7 digits.
+        COD database code for the CIF file.
 
     Returns
     -------
@@ -73,14 +72,11 @@ def normcodid(codid):
             raise ValueError('codid must be a 7-digit integer')
         scid = str(codid)
     elif isinstance(codid, str):
-        scid = codid
         if len(codid) != 7 or not codid.isdigit():
-            s1 = ''.join(c if c.isdigit() else ' ' for c in codid)
-            segs = [w for w in s1.split() if len(w) == 7]
-            if not segs:
-                emsg = 'Could not find 7-digit segment in {}'.format(codid)
-                raise ValueError(emsg)
-            scid = segs[-1]
+            raise ValueError('codid must be a 7-digit string')
+        scid = codid
+    else:
+        raise TypeError('codid is of unsupported type')
     assert len(scid) == 7
     return scid
 
