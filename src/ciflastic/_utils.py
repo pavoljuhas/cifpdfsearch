@@ -178,22 +178,22 @@ def h5writejson(group, cfg):
     cfg : dict, list, tuple
         The JSON-like hierarchical object to be saved.
     """
-    from numpy import string_
+    import numpy
     from itertools import accumulate
     from operator import getitem
     def _assign_type(gtop, gpath):
-        if 'type' in gtop.attrs:
-            return
         owners = list(accumulate((cfg,) + gpath, getitem))
         for owner in reversed(owners):
-            gtop.attrs['type'] = string_(type(owner).__name__)
-            gtop = gtop.parent
-            if 'type' in gtop.attrs:
+            tp = numpy.string_(type(owner).__name__)
+            if gtop.attrs.get('type', '') == tp:
                 break
+            gtop.attrs['type'] = tp
+            gtop = gtop.parent
         return
     for path, value in walkjson(cfg):
         dname = '/'.join(str(p) for p in path)
-        group[dname] = value
+        group.setdefault(dname, value)
+        group[dname][()] = value
         _assign_type(group[dname].parent, path[:-1])
     return
 
