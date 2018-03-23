@@ -11,6 +11,10 @@ import math
 
 from ciflastic import normcodid
 
+# register SFTXrayNeutral lookup table
+import ciflastic.sftxrayneutral
+assert ciflastic.sftxrayneutral is not None
+
 # ----------------------------------------------------------------------------
 
 class calculator:
