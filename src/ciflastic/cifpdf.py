@@ -83,6 +83,7 @@ class calculator:
 
 class HDFStorage:
 
+    _gconfigcalc = 'config/pdfcalculator'
     _dsrgridpath = 'common/rgrid'
     _dspdfpath = 'pdfc/cod{:0>7}'
     dtype = 'float32'
@@ -97,9 +98,17 @@ class HDFStorage:
 
     def writeConfig(self, calc):
         from ciflastic._utils import h5writejson
-        group = self.hfile.require_group('config/pdfcalculator')
+        self.hfile.pop(self._gconfigcalc, None)
+        group = self.hfile.create_group(self._gconfigcalc)
         cfg = calculator.toConfig(calc)
         h5writejson(group, cfg)
+        r = calc.rgrid
+        if not self._dsrgridpath in self.hfile:
+            self.hfile.create_dataset(self._dsrgridpath, shape=r.shape,
+                                      maxshape=(None,), dtype=self.dtype)
+        rds = self.hfile[self._dsrgridpath]
+        rds.resize(r.shape)
+        rds[()] = r
         return
 
 
