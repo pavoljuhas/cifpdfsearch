@@ -11,7 +11,7 @@ pdfstorage: ~/.cache/ciflastic/codpdfs.h5
 pdfcalculator:
   class: PDFCalculator
   evaluatortype: BASIC
-  scatteringfactortable: xray
+  scatteringfactortable: xrayneutral
   peakprofile: gaussian
   peakwidthmodel: constant
   envelopes:
