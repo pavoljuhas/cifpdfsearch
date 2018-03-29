@@ -40,6 +40,8 @@ def main(args):
     progress_step = len(npyfiles) / (80.0 + 1)
     progress_next = 0
     for i, f in enumerate(npyfiles):
+        if os.path.getsize(f) == 0:
+            continue
         g = numpy.load(f)
         codid = normcodid(os.path.basename(f))
         hdb.writePDF(codid,r, g)
