@@ -47,14 +47,9 @@ def cifpath(codid):
     """
     from ciflastic.config import CODDIR
     # handle non-id strings as CIF filenames
-    if isinstance(codid, str) and (len(codid) != 7 or not codid.isdigit()):
+    if isinstance(codid, str):
         bn = os.path.basename(codid)
-        s1 = ''.join(c if c.isdigit() else ' ' for c in bn)
-        segs = [w for w in s1.split() if len(w) == 7]
-        if not segs:
-            emsg = 'Could not find 7-digit segment in {}'.format(bn)
-            raise ValueError(emsg)
-        scid = segs[-1]
+        scid = normcodid(bn)
     else:
         scid = normcodid(codid)
     parts = ['cif', scid[0], scid[1:3], scid[3:5], scid + '.cif']

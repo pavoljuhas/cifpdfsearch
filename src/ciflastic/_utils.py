@@ -4,6 +4,7 @@
 """
 
 import sys
+import re
 
 
 def grouper(iterable, n, *fillvalue):
@@ -53,12 +54,13 @@ def normcodid(codid):
     Parameters
     ----------
     codid : int or str
-        COD database code for the CIF file.
+        COD database code for the CIF file.  Can be also a string
+        that has the COD code as the last 7-digit sequence.
 
     Returns
     -------
     str
-        Absolute path to the CIF file.
+        The 7-digit COD identifier.
 
     Raises
     ------
@@ -72,14 +74,17 @@ def normcodid(codid):
             raise ValueError('codid must be a 7-digit integer')
         scid = str(codid)
     elif isinstance(codid, str):
-        if len(codid) != 7 or not codid.isdigit():
-            raise ValueError('codid must be a 7-digit string')
-        scid = codid
+        mx = _rxcodid.search(codid)
+        if not mx:
+            emsg = 'Could not find 7-digit segment in {}'.format(codid)
+            raise ValueError(emsg)
+        scid = mx.group(0)
     else:
         raise TypeError('codid is of unsupported type')
     assert len(scid) == 7
     return scid
 
+_rxcodid = re.compile(r'(?<!\d)\d{7}(?!\d)')
 
 def genjson(fp=None, filename=None, bufsize=262144, maxbufsize=None):
     """Generate JSON entries from a file-like object.
