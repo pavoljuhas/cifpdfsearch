@@ -92,27 +92,27 @@ class HDFStorage:
     _dspdfpath = 'pdfc/cod{:0>7}'
     dtype = 'float32'
 
-    def __init__(self, filename, mode=None):
-        from h5py import File
+    def __init__(self, filename):
         self.filename = os.path.abspath(filename)
-        self.hfile = File(filename, mode=mode)
         self._rgrid = None
         return
 
 
-    def writeConfig(self, calc):
+    def writeConfig(self, cfg):
         from ciflastic._utils import h5writejson
-        self.hfile.pop(self._gconfigcalc, None)
-        group = self.hfile.create_group(self._gconfigcalc)
-        cfg = calculator.toConfig(calc)
-        h5writejson(group, cfg)
-        r = calc.rgrid
-        if not self._dsrgridpath in self.hfile:
-            self.hfile.create_dataset(self._dsrgridpath, shape=r.shape,
-                                      maxshape=(None,), dtype=self.dtype)
-        rds = self.hfile[self._dsrgridpath]
-        rds.resize(r.shape)
-        rds[()] = r
+        calc = calculator.fromConfig(cfg)
+        with self._openhdf('a') as hfile:
+            hfile.pop(self._gconfigcalc, None)
+            group = hfile.create_group(self._gconfigcalc)
+            h5writejson(group, cfg)
+            r = calc.rgrid
+            if not self._dsrgridpath in hfile:
+                hfile.create_dataset(self._dsrgridpath, shape=r.shape,
+                                     maxshape=(None,), dtype=self.dtype)
+            rds = hfile[self._dsrgridpath]
+            rds.resize(r.shape)
+            rds[()] = r
+        self._rgrid = None
         return
 
 
@@ -123,23 +123,32 @@ class HDFStorage:
             raise ValueError(emsg)
         scid = normcodid(codid)
         nm = self._dspdfpath.format(scid)
-        ds = self.hfile.require_dataset(nm, shape=g.shape, dtype=self.dtype)
-        ds[:] = g
+        with self._openhdf('a') as hfile:
+            ds = hfile.require_dataset(nm, shape=g.shape, dtype=self.dtype)
+            ds[:] = g
         return
 
 
     def readPDF(self, codid):
         scid = normcodid(codid)
         dsname = self._dspdfpath.format(scid)
-        rv = (self.rgrid, self.hfile[dsname].value)
+        with self._openhdf('r') as hfile:
+            g = hfile[dsname].value
+        rv = (self.rgrid, g)
         return rv
 
 
     @property
     def rgrid(self):
         if self._rgrid is None:
-            self._rgrid = self.hfile[self._dsrgridpath][:]
+            with self._openhdf('r') as hfile:
+                self._rgrid = hfile[self._dsrgridpath][:]
         return self._rgrid
+
+
+    def _openhdf(self, mode):
+        import h5py
+        return h5py.File(self.filename)
 
 # end of class HDFStorage
 
