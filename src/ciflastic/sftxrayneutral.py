@@ -31,9 +31,20 @@ class SFTXrayNeutral(ScatteringFactorTable):
     def radiationType(self):
         return "XNEUTRAL"
 
+    def _sfwater(self, q):
+        fh = self.__sftxray._standardLookup("H", q)
+        fo = self.__sftxray._standardLookup("O", q)
+        return 2 * fh + fo
+
     def _standardLookup(self, smbl, q):
         smblbare = smbl.rstrip('+-012345678')
-        return self.__sftxray._standardLookup(smblbare, q)
+        if smblbare == 'D':
+            rv = self._standardLookup('H', q)
+        elif smblbare == 'Wa':
+            rv = self._sfwater(q)
+        else:
+            rv = self.__sftxray._standardLookup(smblbare, q)
+        return rv
 
 # end of class SFTXrayNeutral
 
