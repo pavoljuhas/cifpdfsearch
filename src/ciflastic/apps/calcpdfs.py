@@ -28,7 +28,7 @@ def calculate(pdfc, ciffile):
     r, g = pdfc(crst)
     haszeropeak = lambda x: any(x[r < lo] > 0.01 * x.max())
     if haszeropeak(g):
-        stru = loadStructure(ciffile, eps=0.001)
+        stru = loadStructure(ciffile, fmt='cif', eps=0.001)
         r, g = pdfc(stru)
     if haszeropeak(g):
         raise RuntimeError("contains near-zero peak")
