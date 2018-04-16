@@ -21,15 +21,12 @@ parser.add_argument('cifs', nargs='+',
 
 
 def calculate(pdfc, ciffile):
-    from pyobjcryst import loadCrystal
     from diffpy.structure import loadStructure
     lo = 0.5
-    crst = loadCrystal(ciffile)
-    r, g = pdfc(crst)
+    symeps = 0.001
     haszeropeak = lambda x: any(x[r < lo] > 0.01 * x.max())
-    if haszeropeak(g):
-        stru = loadStructure(ciffile, fmt='cif', eps=0.001)
-        r, g = pdfc(stru)
+    stru = loadStructure(ciffile, fmt='cif', eps=symeps)
+    r, g = pdfc(stru)
     if haszeropeak(g):
         raise RuntimeError("contains near-zero peak")
     return r, g
@@ -38,7 +35,6 @@ def calculate(pdfc, ciffile):
 def main(args):
     from ciflastic import config, cifpdf, normcodid
     from numpy.random import randint
-    from pyobjcryst import ObjCrystException
     if args.config:
         config.initialize(args.config)
     if not os.path.isdir(args.output):
