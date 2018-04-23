@@ -57,5 +57,28 @@ def cifpath(codid):
     return rv
 
 
+def gencifpaths():
+    """Generate absolute paths to CIFs from Crystallography Open Database.
+
+    Yields
+    ------
+    str
+        Absolute paths to CIF files in the local COD database.
+    """
+    from ciflastic.config import CODDIR
+    top = os.path.join(CODDIR, 'cif')
+    for root, dirnames, filenames in os.walk(top):
+        if root == top:
+            dirnames[:] = [d for d in dirnames if len(d) == 1 and d.isdigit()]
+            dirnames.sort()
+            continue
+        dirnames.sort()
+        filenames.sort()
+        for f in filenames:
+            if f.endswith('.cif'):
+                yield os.path.join(root, f)
+    pass
+
+_allcodidscache = None
 _MYDIR = os.path.abspath(__path__[0])
 _DATADIR = os.path.normpath(os.path.join(_MYDIR, '../..'))
