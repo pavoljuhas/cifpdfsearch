@@ -9,7 +9,7 @@ import argparse
 from pprint import pprint
 
 parser = argparse.ArgumentParser(description=__doc__.strip())
-parser.add_argument('-c', '--index', default='codtest',
+parser.add_argument('--index', default='codtest',
                     help="Elastic Search index to be updated")
 parser.add_argument('cifs', nargs='+',
                     help="CIF files for which to calculate PDFs. "
