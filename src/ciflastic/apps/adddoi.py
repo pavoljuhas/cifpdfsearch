@@ -43,9 +43,12 @@ def main(args):
         extras = [a for a in strippedlines if a]
         idx = ciflist.index('-')
         ciflist = ciflist[:idx] + extras + ciflist[idx + 1:]
-    actions = (doiaction(f, args.index) for f in ciflist)
-    actions = filter(None, actions)
     es = Elasticsearch()
+    gscan = eshelpers.scan(es, query={'query' : {'match_all' : {}}},
+                           index=args.index, doc_type='cif', _source=False)
+    docids = set(e['_id'] for e in gscan)
+    actions = (doiaction(f, args.index) for f in ciflist)
+    actions = filter(lambda a : a and a['_id'] in docids, actions)
     res = eshelpers.bulk(es, actions)
     pprint(res)
     return
