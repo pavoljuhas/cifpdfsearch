@@ -1,0 +1,7 @@
+# This file may be used to create an environment using:
+# $ conda create -c diffpy/channel/dev -n <env> --file <this file>
+diffpy.srreal
+diffpy.structure
+h5py
+python=3.6
+pyyaml

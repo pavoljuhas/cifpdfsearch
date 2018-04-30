@@ -1,0 +1,6 @@
+# $ pip install -r <this file>
+diffpy.pdfgetx
+elasticsearch
+gemmi
+pymongo
+pyxdg
