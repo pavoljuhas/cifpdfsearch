@@ -5,7 +5,6 @@
 
 from __future__ import print_function
 
-import sys
 import os.path
 import argparse
 import numpy
@@ -24,14 +23,10 @@ parser.add_argument('args', nargs='+', metavar='file',
 def main(args):
     from ciflastic.cifpdf import HDFStorage
     from ciflastic import config, normcodid
+    from ciflastic._utils import getargswithstdin
     if args.config:
         config.initialize(args.config)
-    npyfiles = args.args
-    if '-' in args.args:
-        strippedlines = (line.strip() for line in sys.stdin)
-        extras = [a for a in strippedlines if a]
-        dashindex = args.args.index('-')
-        npyfiles = args.args[:dashindex] + extras + args.args[dashindex + 1:]
+    npyfiles = list(getargswithstdin(args.args))
     filename = args.output if args.output is not None else config.PDFSTORAGE
     hdb = HDFStorage(filename)
     # TODO - add check for existing config in HDFStorage

@@ -86,6 +86,7 @@ def normcodid(codid):
 
 _rxcodid = re.compile(r'(?<!\d)\d{7}(?!\d)')
 
+
 def genjson(fp=None, filename=None, bufsize=262144, maxbufsize=None):
     """Generate JSON entries from a file-like object.
 
@@ -237,3 +238,28 @@ def _walkjsonpath(obj, path):
         else:
             yield p1, value
     return
+
+
+def getargswithstdin(args):
+    """Generate arguments replacing `-` with lines from standard input.
+
+    Parameters
+    ----------
+    args : iterable
+        An iterable of arguments which may contain "-".
+
+    Yields
+    ------
+    arg : str
+        Items from the input iterable and optionally stripped lines from
+        the standard input.
+    """
+    for a in args:
+        if a == '-':
+            barelines = (line.strip() for line in sys.stdin)
+            arglines = (aa for aa in barelines if aa)
+            for a in arglines:
+                yield a
+        else:
+            yield a
+    pass

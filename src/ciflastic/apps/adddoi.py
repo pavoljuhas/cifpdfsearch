@@ -3,8 +3,6 @@
 '''Add DOI values from the specified CIF files to the ES index.
 '''
 
-import sys
-import os.path
 import argparse
 from pprint import pprint
 
@@ -35,14 +33,10 @@ def doiaction(filename, index):
 
 
 def main(args):
+    from ciflastic._utils import getargswithstdin
     from elasticsearch import Elasticsearch
     from elasticsearch import helpers as eshelpers
-    ciflist = args.cifs
-    if '-' in ciflist:
-        strippedlines = (line.strip() for line in sys.stdin)
-        extras = [a for a in strippedlines if a]
-        idx = ciflist.index('-')
-        ciflist = ciflist[:idx] + extras + ciflist[idx + 1:]
+    ciflist = getargswithstdin(args.cifs)
     es = Elasticsearch()
     gscan = eshelpers.scan(es, query={'query' : {'match_all' : {}}},
                            index=args.index, doc_type='cif', _source=False)

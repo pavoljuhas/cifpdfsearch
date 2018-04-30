@@ -3,7 +3,6 @@
 '''Calculate PDFs for the specified CIF files.
 '''
 
-import sys
 import os.path
 import argparse
 import numpy
@@ -34,18 +33,14 @@ def calculate(pdfc, ciffile):
 
 def main(args):
     from ciflastic import config, cifpdf, normcodid
+    from ciflastic._utils import getargswithstdin
     from numpy.random import randint
     if args.config:
         config.initialize(args.config)
     if not os.path.isdir(args.output):
         emsg = "{} must be a directory".format(args.output)
         raise ValueError(emsg)
-    ciflist = args.cifs
-    if '-' in ciflist:
-        strippedlines = (line.strip() for line in sys.stdin)
-        extras = [a for a in strippedlines if a]
-        idx = ciflist.index('-')
-        ciflist = ciflist[:idx] + extras + ciflist[idx + 1:]
+    ciflist = list(getargswithstdin(args.cifs))
     pdfc = cifpdf.calculator.fromConfig(config.PDFCALCULATOR)
     while ciflist:
         cf = ciflist.pop(randint(len(ciflist)))
