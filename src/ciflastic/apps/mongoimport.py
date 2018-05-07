@@ -7,8 +7,7 @@ import sys
 import os.path
 import argparse
 from pprint import pprint
-from ciflastic._utils import tofloat, grouper, safecall
-import datetime
+from ciflastic._utils import grouper, toisoformat
 
 
 parser = argparse.ArgumentParser(description=__doc__.strip())
@@ -40,15 +39,6 @@ year year
 time date
 '''.split()
 ISSDOCMAP = [tuple(x) for x in grouper(ISSDOCMAP, 2)]
-
-
-def toisoformat(epoch):
-    epochms = round(epoch, 3)
-    dt = datetime.datetime.fromtimestamp(epochms)
-    tiso = dt.isoformat()
-    rv = tiso[:-3] if dt.microsecond else tiso
-    assert len(rv) in (19, 23)
-    return rv
 
 
 ISSCONVERTERS = {
