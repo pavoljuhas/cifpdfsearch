@@ -8,6 +8,7 @@ import os.path
 import argparse
 from pprint import pprint
 from ciflastic._utils import tofloat, grouper, safecall
+import datetime
 
 
 parser = argparse.ArgumentParser(description=__doc__.strip())
@@ -36,15 +37,25 @@ scan_id scan_id
 time time
 trajectory_name trajectory_name
 year year
-time time_ms
+time date
 '''.split()
 ISSDOCMAP = [tuple(x) for x in grouper(ISSDOCMAP, 2)]
+
+
+def toisoformat(epoch):
+    epochms = round(epoch, 3)
+    dt = datetime.datetime.fromtimestamp(epochms)
+    tiso = dt.isoformat()
+    rv = tiso[:-3] if dt.microsecond else tiso
+    assert len(rv) in (19, 23)
+    return rv
+
 
 ISSCONVERTERS = {
     'issid' : str,
     'cycle' : int,
     'year' : int,
-    'time_ms' : lambda t: round(1000 * t),
+    'date' : toisoformat,
     '' : lambda x: x,
 }
 
@@ -84,9 +95,10 @@ def main(args):
     es = Elasticsearch()
     es.indices.delete(index=args.index, ignore_unavailable=True)
     es.indices.create(index=args.index)
-    mbody = {"properties" :
-             {"time_ms" : {"type" : "date", "format": "epoch_millis"}}
-             }
+    mbody = {"properties" : {
+        "time" : {"type" : "date", "format": "epoch_second"},
+        "date" : {"type" : "date", "format": "strict_date_optional_time"}
+    }}
     es.indices.put_mapping(doc_type='iss', index=args.index, body=mbody)
     eshelpers.bulk(es, actions)
     return
