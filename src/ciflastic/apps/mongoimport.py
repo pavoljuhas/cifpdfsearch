@@ -14,6 +14,12 @@ parser.add_argument('--index', default='isstest',
 
 noconversion = lambda x: x
 
+def normalize_counts(d):
+    totalcount = sum(d.values()) or 1.0
+    rv = dict((k, v / totalcount) for k, v in d.items())
+    return rv
+
+
 ISSDOCMAP = [
     # mongoname  esname  converter
     ("_id", "issid", str),
@@ -36,6 +42,34 @@ ISSDOCMAP = [
     ("trajectory_name", "trajectory_name", noconversion),
     ("year", "year", int),
     ("time", "date", toisoformat),
+]
+
+
+XPDDOCMAP = [
+    # mongoname  esname  converter
+    ("_id", "xpdid", str),
+    ("bt_experimenters", "experimenters", noconversion),
+    ("bt_piLast", "pi", noconversion),
+    ("bt_safN", "saf", noconversion),
+    ("bt_wavelength", "wavelength", float),
+    ("composition_string", "formula", noconversion),
+    ("dark_frame", "dark_frame", bool),
+    ("group", "group", noconversion),
+    ("lead_experimenter", "pi", noconversion),
+    ("notes", "comment", noconversion),
+    ("num_points", "num_points", noconversion),
+    ("plan_name", "plan_name", noconversion),
+    ("sample_composition", "composition", normalize_counts),
+    ("scan_id", "scan_id", noconversion),
+    ("sp_computed_exposure", "sp_computed_exposure", float),
+    ("sp_num_frames", "sp_num_frames", int),
+    ("sp_plan_name", "sp_plan_name", noconversion),
+    ("sp_time_per_frame", "sp_time_per_frame", float),
+    ("sp_type", "sp_type", noconversion),
+    ("time", "time", noconversion),
+    ("time", "date", toisoformat),
+    ("uid", "uid", noconversion),
+    ("time", "year", lambda t : int(toisoformat(t)[:4])),
 ]
 
 
