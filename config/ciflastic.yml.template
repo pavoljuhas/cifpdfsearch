@@ -24,3 +24,7 @@ pdfcalculator:
   rstep: 0.01
   scale: 1.0
   uisowidth: 0.004
+
+mongo:
+  host: localhost
+  port: 27017
