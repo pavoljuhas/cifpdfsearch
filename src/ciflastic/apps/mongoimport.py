@@ -46,9 +46,10 @@ def esdocument(docmap, entry):
         if not mname in entry:
             continue
         mvalue = entry[mname]
-        if mvalue == '':
+        evalue = fcnv(mvalue)
+        if evalue is None:
             continue
-        rv[esname] = fcnv(mvalue)
+        rv[esname] = evalue
     return rv
 
 
