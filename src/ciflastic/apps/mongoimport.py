@@ -4,7 +4,7 @@
 '''
 
 import argparse
-from ciflastic._utils import grouper, toisoformat
+from ciflastic._utils import toisoformat
 
 
 parser = argparse.ArgumentParser(description=__doc__.strip())
@@ -12,55 +12,42 @@ parser.add_argument('--index', default='isstest',
                     help="Elastic Search index to be updated")
 
 
-ISSDOCMAP = '''
-_id issid
-comment comment
-cycle cycle
-detectors detectors
-e0 e0
-edge edge
-element element
-experiment experiment
-group group
-name name
-num_points num_points
-plan_name plan_name
-PI pi
-PROPOSAL proposal
-SAF saf
-scan_id scan_id
-time time
-trajectory_name trajectory_name
-year year
-time date
-'''.split()
-ISSDOCMAP = [tuple(x) for x in grouper(ISSDOCMAP, 2)]
+noconversion = lambda x: x
+
+ISSDOCMAP = [
+    # mongoname  esname  converter
+    ("_id", "issid", str),
+    ("comment", "comment", noconversion),
+    ("cycle", "cycle", int),
+    ("detectors", "detectors", noconversion),
+    ("e0", "e0", noconversion),
+    ("edge", "edge", noconversion),
+    ("element", "element", noconversion),
+    ("experiment", "experiment", noconversion),
+    ("group", "group", noconversion),
+    ("name", "name", noconversion),
+    ("num_points", "num_points", noconversion),
+    ("plan_name", "plan_name", noconversion),
+    ("PI", "pi", noconversion),
+    ("PROPOSAL", "proposal", noconversion),
+    ("SAF", "saf", noconversion),
+    ("scan_id", "scan_id", noconversion),
+    ("time", "time", noconversion),
+    ("trajectory_name", "trajectory_name", noconversion),
+    ("year", "year", int),
+    ("time", "date", toisoformat),
+]
 
 
-ISSCONVERTERS = {
-    'issid' : str,
-    'cycle' : int,
-    'year' : int,
-    'date' : toisoformat,
-    '' : lambda x: x,
-}
-
-
-def getconverter(eskey):
-    fcnv = ISSCONVERTERS.get(eskey, ISSCONVERTERS[''])
-    return fcnv
-
-
-def issdocument(rsentry):
+def esdocument(docmap, entry):
     rv = {}
-    assert '_id' in rsentry
-    for mname, esname in ISSDOCMAP:
-        if not mname in rsentry:
+    assert '_id' in entry
+    for mname, esname, fcnv in docmap:
+        if not mname in entry:
             continue
-        mvalue = rsentry[mname]
+        mvalue = entry[mname]
         if mvalue == '':
             continue
-        fcnv = getconverter(esname)
         rv[esname] = fcnv(mvalue)
     return rv
 
@@ -76,7 +63,7 @@ def main(args):
     projection = set(x[0] for x in ISSDOCMAP)
     cursor = collection.find(projection=projection,
                              sort=[('time', DESCENDING)])
-    documents = (issdocument(e) for e in cursor)
+    documents = (esdocument(ISSDOCMAP, e) for e in cursor)
     actions = (dict(_index=args.index, _id=d['issid'], _type='iss', _source=d)
                for d in documents)
     es = Elasticsearch()
