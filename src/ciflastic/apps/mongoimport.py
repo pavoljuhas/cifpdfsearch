@@ -3,10 +3,7 @@
 '''Import MongoDB databroker entries for ISS or XPD beamlines.
 '''
 
-import sys
-import os.path
 import argparse
-from pprint import pprint
 from ciflastic._utils import grouper, toisoformat
 
 
@@ -14,7 +11,6 @@ parser = argparse.ArgumentParser(description=__doc__.strip())
 parser.add_argument('--index', default='isstest',
                     help="Elastic Search index to be updated")
 
-_MONGO_HOST = {'port' : 9876}
 
 ISSDOCMAP = '''
 _id issid
@@ -70,10 +66,11 @@ def issdocument(rsentry):
 
 
 def main(args):
+    from ciflastic import config
     from pymongo import MongoClient, DESCENDING
     from elasticsearch import Elasticsearch
     from elasticsearch import helpers as eshelpers
-    client = MongoClient(**_MONGO_HOST)
+    client = MongoClient(**config.MONGO)
     db = client['iss-datastore']
     collection = db['run_start']
     projection = set(x[0] for x in ISSDOCMAP)
