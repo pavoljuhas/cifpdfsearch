@@ -8,19 +8,32 @@ from ciflastic._utils import toisoformat
 
 
 parser = argparse.ArgumentParser(description=__doc__.strip())
-parser.add_argument('--index', default='isstest',
-                    help="Elastic Search index to be updated")
+parser.add_argument('beamline', choices=['iss', 'xpd'],
+                    help="NSLS-II beamline to be imported")
+parser.add_argument('--index',
+                    help="Elastic Search index to be updated "
+                         "[{beamline}.test]")
 
 
 noconversion = lambda x: x
 
 def normalize_counts(d):
+    if not isinstance(d, dict):
+        return None
     totalcount = sum(d.values()) or 1.0
     rv = dict((k, v / totalcount) for k, v in d.items())
     return rv
 
 
-ISSDOCMAP = [
+def listofstrings(v):
+    rv = None
+    if isinstance(v, list) and all(isinstance(w, str) for w in v):
+        rv = v
+    return rv
+
+DOCMAP = {}
+
+DOCMAP['iss'] = [
     # mongoname  esname  converter
     ("_id", "issid", str),
     ("comment", "comment", noconversion),
@@ -44,13 +57,12 @@ ISSDOCMAP = [
     ("time", "date", toisoformat),
 ]
 
-
-XPDDOCMAP = [
+DOCMAP['xpd'] = [
     # mongoname  esname  converter
     ("_id", "xpdid", str),
-    ("bt_experimenters", "experimenters", noconversion),
+    ("bt_experimenters", "experimenters", listofstrings),
     ("bt_piLast", "pi", noconversion),
-    ("bt_safN", "saf", noconversion),
+    ("bt_safN", "saf", str),
     ("bt_wavelength", "wavelength", float),
     ("composition_string", "formula", noconversion),
     ("dark_frame", "dark_frame", bool),
@@ -80,7 +92,7 @@ def esdocument(docmap, entry):
         if not mname in entry:
             continue
         mvalue = entry[mname]
-        evalue = fcnv(mvalue)
+        evalue = fcnv(mvalue) if mvalue is not None else None
         if evalue is None:
             continue
         rv[esname] = evalue
@@ -92,23 +104,25 @@ def main(args):
     from pymongo import MongoClient, DESCENDING
     from elasticsearch import Elasticsearch
     from elasticsearch import helpers as eshelpers
+    dbname = '{.beamline}-datastore'.format(args)
+    esindex = args.index or '{.beamline}test'.format(args)
     client = MongoClient(**config.MONGO)
-    db = client['iss-datastore']
+    db = client[dbname]
     collection = db['run_start']
-    projection = set(x[0] for x in ISSDOCMAP)
-    cursor = collection.find(projection=projection,
-                             sort=[('time', DESCENDING)])
-    documents = (esdocument(ISSDOCMAP, e) for e in cursor)
-    actions = (dict(_index=args.index, _id=d['issid'], _type='iss', _source=d)
-               for d in documents)
+    bmdocmap = DOCMAP[args.beamline]
+    projection = set(x[0] for x in bmdocmap)
+    cursor = collection.find(projection=projection)
+    idsdocs = ((str(e['_id']), esdocument(bmdocmap, e)) for e in cursor)
+    actions = (dict(_index=esindex, _id=esid, _type=args.beamline, _source=d)
+               for esid, d in idsdocs)
     es = Elasticsearch()
-    es.indices.delete(index=args.index, ignore_unavailable=True)
-    es.indices.create(index=args.index)
+    es.indices.delete(index=esindex, ignore_unavailable=True)
+    es.indices.create(index=esindex)
     mbody = {"properties" : {
         "time" : {"type" : "date", "format": "epoch_second"},
         "date" : {"type" : "date", "format": "strict_date_optional_time"}
     }}
-    es.indices.put_mapping(doc_type='iss', index=args.index, body=mbody)
+    es.indices.put_mapping(doc_type=args.beamline, index=esindex, body=mbody)
     eshelpers.bulk(es, actions)
     return
 
