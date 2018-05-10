@@ -13,6 +13,8 @@ parser.add_argument('beamline', choices=['iss', 'xpd'],
 parser.add_argument('--index',
                     help="Elastic Search index to be updated "
                          "[{beamline}.test]")
+parser.add_argument('--no-filter', action='store_false', dest='filter',
+                    help="Disable filtering to internal experimenters")
 
 
 noconversion = lambda x: x
@@ -84,6 +86,46 @@ DOCMAP['xpd'] = [
     ("time", "year", lambda t : int(toisoformat(t)[:4])),
 ]
 
+DOCFILTER = {
+    'iss' : {},
+    'xpd' : {
+        # limit to XPD beamline stuff and Billinge relations
+        '$or' : [
+            {'bt_piLast' : {'$exists' : False}},
+            {'bt_piLast' : {'$in' : (
+                '0713_test',
+                'Abeykoon',
+                'Antonaropoulos',
+                'Assefa',
+                'Banerjee',
+                'Benjiamin',
+                'Billinge',
+                'Bordet',
+                'Bozin',
+                'Demo',
+                'Dooryhee',
+                'Frandsen',
+                'Ghose',
+                'Hanson',
+                'Milinda and Runze',
+                'Milinda',
+                'Pinero',
+                'Robinson',
+                'Sanjit',
+                'Shi',
+                'Test',
+                'Yang',
+                'billinge',
+                'simulation',
+                'test',
+                'testPI',
+                'testPI_2',
+                'testTake2',
+                'xpdAcq_realase',
+            )}}
+        ]},
+}
+
 
 def esdocument(docmap, entry):
     rv = {}
@@ -101,7 +143,7 @@ def esdocument(docmap, entry):
 
 def main(args):
     from ciflastic import config
-    from pymongo import MongoClient, DESCENDING
+    from pymongo import MongoClient
     from elasticsearch import Elasticsearch
     from elasticsearch import helpers as eshelpers
     dbname = '{.beamline}-datastore'.format(args)
@@ -111,7 +153,8 @@ def main(args):
     collection = db['run_start']
     bmdocmap = DOCMAP[args.beamline]
     projection = set(x[0] for x in bmdocmap)
-    cursor = collection.find(projection=projection)
+    mfilter = DOCFILTER[args.beamline] if args.filter else {}
+    cursor = collection.find(mfilter, projection=projection)
     idsdocs = ((str(e['_id']), esdocument(bmdocmap, e)) for e in cursor)
     actions = (dict(_index=esindex, _id=esid, _type=args.beamline, _source=d)
                for esid, d in idsdocs)
