@@ -9,6 +9,7 @@ Packages:   ciflastic
 import os
 import re
 import sys
+import glob
 from setuptools import setup, find_packages
 
 # Use this version when git data are not available, like in git zip archive.
@@ -84,6 +85,12 @@ setup_args = dict(
     include_package_data = True,
     install_requires = [],
     zip_safe = False,
+    data_files = [
+        ('', ['README.md']),
+        ('config', ['config/ciflastic.yml.template']),
+        ('standards', (glob.glob('standards/*.json') +
+                       glob.glob('standards/*.cif'))),
+    ],
     author = "Pavol Juhas",
     author_email = "pavol.juhas@gmail.com",
     description = "elastic search tools for CIF structures and NSLS2 data",
