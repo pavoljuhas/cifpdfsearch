@@ -108,3 +108,5 @@ venv.bak/
 errors.err
 tags
 /config/ciflastic.yml
+setup.cfg
+/src/**/version.cfg

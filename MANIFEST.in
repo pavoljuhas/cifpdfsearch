@@ -1,0 +1,11 @@
+include standards/*.cif
+include standards/*.json
+recursive-include src *
+recursive-exclude src *.py[cod]
+exclude MANIFEST.in
+include README.md
+global-exclude .gitattributes .gitignore .gitarchive.cfg
+global-exclude .DS_Store
+
+# Avoid user content in setup.cfg to make distribution reproducible.
+exclude setup.cfg

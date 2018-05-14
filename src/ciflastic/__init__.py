@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
 
 __all__ = ['cifid', 'cifdocument', 'genjson', 'walkjson',
-           'jload', 'datapath', 'cifpath']
+           'jload', 'datapath', 'cifpath', 'APPDATADIR']
 
 import json
 import os.path
+from pkg_resources import Requirement, resource_filename
 
 from ciflastic.cifdocument import cifid, cifdocument
 from ciflastic._utils import genjson, walkjson, normcodid
@@ -21,7 +22,7 @@ def jload(filename):
 def datapath(basename):
     """Return absolute path to data files root in ciflastic.
     """
-    return os.path.join(_DATADIR, basename)
+    return os.path.join(APPDATADIR, basename)
 
 
 def cifpath(codid):
@@ -79,6 +80,21 @@ def gencifpaths():
                 yield os.path.join(root, f)
     pass
 
-_allcodidscache = None
-_MYDIR = os.path.abspath(__path__[0])
-_DATADIR = os.path.normpath(os.path.join(_MYDIR, '../..'))
+# ----------------------------------------------------------------------------
+
+# Resolve APPDATADIR base path to the application data files.
+_upbasedir = os.path.normpath(resource_filename(__name__, '..'))
+_development_mode = (
+    os.path.basename(_upbasedir) == "src" and
+    os.path.isfile(os.path.join(_upbasedir, "../setup.py"))
+)
+
+# Requirement must have egg-info.  Do not use in _development_mode.
+_req = Requirement.parse("ciflastic")
+APPDATADIR = (os.path.dirname(_upbasedir) if _development_mode
+              else resource_filename(_req, ""))
+APPDATADIR = os.path.abspath(APPDATADIR)
+
+del _upbasedir
+del _development_mode
+del _req
