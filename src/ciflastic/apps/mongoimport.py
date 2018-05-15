@@ -55,6 +55,7 @@ DOCMAP['iss'] = [
     ("scan_id", "scan_id", noconversion),
     ("time", "time", noconversion),
     ("trajectory_name", "trajectory_name", noconversion),
+    ("uid", "uid", noconversion),
     ("year", "year", int),
     ("time", "date", toisoformat),
 ]
