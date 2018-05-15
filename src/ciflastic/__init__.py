@@ -9,6 +9,7 @@ from pkg_resources import Requirement, resource_filename
 
 from ciflastic.cifdocument import cifid, cifdocument
 from ciflastic._utils import genjson, walkjson, normcodid
+from ciflastic.version import __version__
 
 
 def jload(filename):
@@ -98,3 +99,6 @@ APPDATADIR = os.path.abspath(APPDATADIR)
 del _upbasedir
 del _development_mode
 del _req
+
+# silence the pyflakes syntax checker
+assert __version__ or True
