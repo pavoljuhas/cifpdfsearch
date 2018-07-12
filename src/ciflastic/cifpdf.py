@@ -148,7 +148,7 @@ class HDFStorage:
 
     def _openhdf(self, mode):
         import h5py
-        return h5py.File(self.filename)
+        return h5py.File(self.filename, mode)
 
 # end of class HDFStorage
 
