@@ -94,7 +94,8 @@ def normcodid(codid):
     TypeError
         When codid is of unsupported type.
     """
-    if isinstance(codid, int):
+    import numbers
+    if isinstance(codid, numbers.Integral):
         if not 1000000 <= codid <= 9999999:
             raise ValueError('codid must be a 7-digit integer')
         scid = str(codid)
