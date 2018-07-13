@@ -17,6 +17,9 @@ with h5py.File(PDFSTORAGE, 'r') as hfile:
 
 def ccvisit(name, ds):
     cid = normcodid(name)
+    ds = ds.value
+    if not ds.any():
+        return
     ccni = numpy.corrcoef(gni, ds)[0, 1]
     print(cid, ccni)
     return
