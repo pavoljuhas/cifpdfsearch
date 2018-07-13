@@ -5,8 +5,16 @@ Load all PDFs using h5py visititems method.
 '''
 
 import time
-from ciflastic.config import PDFSTORAGE
+import argparse
+
 from h5py import File
+
+from ciflastic.config import PDFSTORAGE
+
+parser = argparse.ArgumentParser(usage="%(prog)s [options] [count]")
+parser.add_argument('count', type=int, nargs='?')
+
+pargs = parser.parse_args()
 
 class VCounter:
     cnt = 0
@@ -14,7 +22,8 @@ class VCounter:
     def __call__(self, name, dataset):
         self.cnt += 1
         self.total += dataset.value.sum()
-        return
+        stopflag = pargs.count and self.cnt >= pargs.count or None
+        return stopflag
 
 v = VCounter()
 
