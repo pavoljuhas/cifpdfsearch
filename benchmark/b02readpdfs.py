@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 '''
-Load all PDFs using h5py visititems method.
+Load all PDFs HDFStorage.readPDF method.
 '''
 
 import os.path
