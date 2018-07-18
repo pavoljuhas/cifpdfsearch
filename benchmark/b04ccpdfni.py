@@ -26,7 +26,6 @@ def ccvisit(name, ds):
 
 
 def main():
-    global hfile
     print("#C PDF correlation to Ni-{}".format(codnickel))
     print("# codid  corr".format(codnickel))
     hfile = h5py.File(PDFSTORAGE, 'r')
