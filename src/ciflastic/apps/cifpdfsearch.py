@@ -23,6 +23,9 @@ parser.add_argument('-c', '--composition',
                     'PDFs, for example "Na0.5"')
 parser.add_argument('-t', '--tolerance', type=float, default=0.0,
                     help="tolerance on normalized stoichiometry, e.g., 0.1")
+parser.add_argument('-s', '--sort', action='store_true',
+                    help="sort the output by correlation coefficient in "
+                         "descending order")
 parser.add_argument('searchpdf', help="PDF data to be matched with COD PDFs, "
                     'a two-column text file with (r, g) values.  '
                     'When "cod:ID" use PDF simulation for the COD ID entry.')
@@ -31,7 +34,7 @@ parser.add_argument('searchpdf', help="PDF data to be matched with COD PDFs, "
 def genidpdf_all(hfile):
     grp = hfile['pdfc']
     for n, v in grp.items():
-        yield normcodid(n), v
+        yield normcodid(n), v.value
     pass
 
 
@@ -69,7 +72,7 @@ def genidpdf_composition(hfile, composition, tolerance):
     for codid in genids:
         ds = hfile.get(dspdfpath.format(codid))
         if ds is not None:
-            yield codid, ds
+            yield codid, ds.value
     pass
 
 
@@ -90,9 +93,9 @@ def correlation(robs, gobs, rcod, gcod):
 def main():
     pargs = parser.parse_args()
     print("# ciflastic.apps.corrcodpdfs")
+    print("# searchpdf =", os.path.basename(pargs.searchpdf))
     print("# composition =", pargs.composition or 'any')
     print("# tolerance =", pargs.tolerance)
-    print("# searchpdf =", os.path.basename(pargs.searchpdf))
     print("#S 1")
     print("#L codid  correlation")
     # load searchpdf
@@ -106,14 +109,13 @@ def main():
     rcod = hdb.rgrid
     getall = (pargs.composition is None or pargs.composition.lower() == 'any')
     hfile = h5py.File(PDFSTORAGE, mode='r')
-    gen = (genidpdf_all(hfile) if getall
-           else genidpdf_composition(hfile, pargs.composition,
-                                     pargs.tolerance))
-    for codid, ds in gen:
-        gcod = ds[:]
-        if not gcod.any():
-            continue
-        cc = correlation(robs, gobs, rcod, gcod)
+    gpdfs = (genidpdf_all(hfile) if getall
+             else genidpdf_composition(hfile, pargs.composition,
+                                       pargs.tolerance))
+    gcorr = ((codid, correlation(robs, gobs, rcod, gcod))
+             for codid, gcod in gpdfs if gcod.any())
+    gout = sorted(gcorr, key=lambda x: -x[1]) if pargs.sort else gcorr
+    for codid, cc in gout:
         print(codid, cc)
     return
 
