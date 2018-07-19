@@ -18,9 +18,6 @@ dspdfpath = 'pdfc/cod{:0>7}'
 
 
 parser = argparse.ArgumentParser(description=__doc__.strip())
-parser.add_argument('-c', '--composition',
-                    help='normalized chemical composition to limit checked '
-                    'PDFs, for example "Na0.5"')
 parser.add_argument('--rmin', type=float,
                     help="lower bound for evaluating correlation coefficient")
 parser.add_argument('--rmax', type=float,
@@ -35,7 +32,8 @@ parser.add_argument('-s', '--sort', action='store_true',
 parser.add_argument('searchpdf', help="PDF data to be matched with COD PDFs, "
                     'a two-column text file with (r, g) values.  '
                     'When "cod:ID" use PDF simulation for the COD ID entry.')
-
+parser.add_argument('composition', nargs='*', help='limit search to specified '
+                    'normalized composition, for example "Na 0.5 Cl 0.5"')
 
 def genidpdf_all(hfile):
     grp = hfile['pdfc']
@@ -116,6 +114,7 @@ def calcbounds(robs, rcod, rmin=None, rmax=None):
 
 def main():
     pargs = parser.parse_args()
+    composition = ' '.join(pargs.composition)
     # load observed PDF data to be matched with COD PDFs
     hdb = HDFStorage(PDFSTORAGE)
     if pargs.searchpdf.startswith('cod:'):
@@ -129,7 +128,7 @@ def main():
     # print out the header
     print("#T ciflastic.apps.cifpdfsearch")
     print("#C searchpdf =", os.path.basename(pargs.searchpdf))
-    print("#C composition =", pargs.composition or '*')
+    print("#C composition =", composition or '*')
     print("#C tolerance =", pargs.tolerance)
     print("#C ccmin =", pargs.ccmin)
     print("#C rmin =", bounds['rmin'])
@@ -137,9 +136,9 @@ def main():
     print("#S 1")
     print("#L codid  correlation")
     # generate correlation coefficients
-    has_composition = (pargs.composition and pargs.composition != '*')
+    has_composition = composition and composition != '*'
     hfile = h5py.File(PDFSTORAGE, mode='r')
-    gpdfs = (genidpdf_composition(hfile, pargs.composition, pargs.tolerance)
+    gpdfs = (genidpdf_composition(hfile, composition, pargs.tolerance)
              if has_composition else genidpdf_all(hfile))
     gcorr = ((codid, correlation(robs, gobs, rcod, gcod, bounds))
              for codid, gcod in gpdfs if gcod.any())
