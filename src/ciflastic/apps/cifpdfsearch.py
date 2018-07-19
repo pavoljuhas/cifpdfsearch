@@ -25,11 +25,13 @@ parser.add_argument('--rmin', type=float,
                     help="lower bound for evaluating correlation coefficient")
 parser.add_argument('--rmax', type=float,
                     help="upper bound for evaluating correlation coefficient")
+parser.add_argument('--ccmin', type=float, default=-1.0,
+                    help="minimum correlation value for a COD match")
 parser.add_argument('-t', '--tolerance', type=float, default=0.0,
                     help="tolerance on normalized stoichiometry, e.g., 0.1")
 parser.add_argument('-s', '--sort', action='store_true',
                     help="sort the output by correlation coefficient in "
-                         "descending order")
+                    "descending order")
 parser.add_argument('searchpdf', help="PDF data to be matched with COD PDFs, "
                     'a two-column text file with (r, g) values.  '
                     'When "cod:ID" use PDF simulation for the COD ID entry.')
@@ -129,6 +131,7 @@ def main():
     print("#C searchpdf =", os.path.basename(pargs.searchpdf))
     print("#C composition =", pargs.composition or '*')
     print("#C tolerance =", pargs.tolerance)
+    print("#C ccmin =", pargs.ccmin)
     print("#C rmin =", bounds['rmin'])
     print("#C rmax =", bounds['rmax'])
     print("#S 1")
@@ -140,9 +143,11 @@ def main():
              if has_composition else genidpdf_all(hfile))
     gcorr = ((codid, correlation(robs, gobs, rcod, gcod, bounds))
              for codid, gcod in gpdfs if gcod.any())
-    gout = gcorr
+    gcorr1 = (gcorr if pargs.ccmin <= -1 else
+              (xx for xx in gcorr if xx[1] >= pargs.ccmin))
+    gout = gcorr1
     if pargs.sort:
-        gout = sorted(gcorr, key=lambda x: x[1], reverse=True)
+        gout = sorted(gout, key=lambda x: x[1], reverse=True)
     for codid, cc in gout:
         print(codid, cc)
     return
