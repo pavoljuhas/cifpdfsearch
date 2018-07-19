@@ -21,6 +21,10 @@ parser = argparse.ArgumentParser(description=__doc__.strip())
 parser.add_argument('-c', '--composition',
                     help='normalized chemical composition to limit checked '
                     'PDFs, for example "Na0.5"')
+parser.add_argument('--rmin', type=float,
+                    help="lower bound for evaluating correlation coefficient")
+parser.add_argument('--rmax', type=float,
+                    help="upper bound for evaluating correlation coefficient")
 parser.add_argument('-t', '--tolerance', type=float, default=0.0,
                     help="tolerance on normalized stoichiometry, e.g., 0.1")
 parser.add_argument('-s', '--sort', action='store_true',
@@ -76,13 +80,9 @@ def genidpdf_composition(hfile, composition, tolerance):
     pass
 
 
-def correlation(robs, gobs, rcod, gcod):
-    eps = 1e-7
-    ub = max(robs[0], rcod[0])
-    lb = min(robs[-1], rcod[-1])
-    rstep = rcod[1] - rcod[0]
-    clo = int(round(ub / rstep))
-    chi = int((lb + eps) // rstep)
+def correlation(robs, gobs, rcod, gcod, bounds):
+    clo = bounds['clo']
+    chi = bounds['chi']
     r1 = rcod[clo:chi]
     gcod1 = gcod[clo:chi]
     gobs1 = numpy.interp(r1, robs, gobs)
@@ -90,31 +90,59 @@ def correlation(robs, gobs, rcod, gcod):
     return rv
 
 
+def calcbounds(robs, rcod, rmin=None, rmax=None):
+    """
+    Calculate bounds and overlap indices for give rmin, rmax
+
+    Return
+    ------
+    dict
+    """
+    eps = 1e-5
+    lb = max(robs[0], rcod[0])
+    if rmin is not None:
+        lb = max(rmin, lb)
+    ub = min(robs[-1], rcod[-1])
+    if rmax is not None:
+        ub = min(ub, rmax)
+    rstep = rcod[1] - rcod[0]
+    clo = int((lb + eps) // rstep)
+    chi = int(round(ub / rstep))
+    rv = dict(clo=clo, chi=chi, rmin=rcod[clo], rmax=rcod[chi])
+    return rv
+
+
 def main():
     pargs = parser.parse_args()
-    print("# ciflastic.apps.corrcodpdfs")
-    print("# searchpdf =", os.path.basename(pargs.searchpdf))
-    print("# composition =", pargs.composition or 'any')
-    print("# tolerance =", pargs.tolerance)
-    print("#S 1")
-    print("#L codid  correlation")
-    # load searchpdf
+    # load observed PDF data to be matched with COD PDFs
     hdb = HDFStorage(PDFSTORAGE)
     if pargs.searchpdf.startswith('cod:'):
         robs, gobs = hdb.readPDF(pargs.searchpdf[4:])
     else:
         robs, gobs = loaddata(pargs.searchpdf, usecols=(0, 1),
                               dtype=hdb.dtype, unpack=True)
-    # create generator of COD IDs and PDF curves
+    # determine the actual bounds used and the rcod slice
     rcod = hdb.rgrid
-    getall = (pargs.composition is None or pargs.composition.lower() == 'any')
+    bounds = calcbounds(robs, rcod, rmin=pargs.rmin, rmax=pargs.rmax)
+    # print out the header
+    print("#T ciflastic.apps.cifpdfsearch")
+    print("#C searchpdf =", os.path.basename(pargs.searchpdf))
+    print("#C composition =", pargs.composition or '*')
+    print("#C tolerance =", pargs.tolerance)
+    print("#C rmin =", bounds['rmin'])
+    print("#C rmax =", bounds['rmax'])
+    print("#S 1")
+    print("#L codid  correlation")
+    # generate correlation coefficients
+    has_composition = (pargs.composition and pargs.composition != '*')
     hfile = h5py.File(PDFSTORAGE, mode='r')
-    gpdfs = (genidpdf_all(hfile) if getall
-             else genidpdf_composition(hfile, pargs.composition,
-                                       pargs.tolerance))
-    gcorr = ((codid, correlation(robs, gobs, rcod, gcod))
+    gpdfs = (genidpdf_composition(hfile, pargs.composition, pargs.tolerance)
+             if has_composition else genidpdf_all(hfile))
+    gcorr = ((codid, correlation(robs, gobs, rcod, gcod, bounds))
              for codid, gcod in gpdfs if gcod.any())
-    gout = sorted(gcorr, key=lambda x: -x[1]) if pargs.sort else gcorr
+    gout = gcorr
+    if pargs.sort:
+        gout = sorted(gcorr, key=lambda x: x[1], reverse=True)
     for codid, cc in gout:
         print(codid, cc)
     return
