@@ -142,7 +142,10 @@ def esdocument(docmap, entry):
     return rv
 
 
-def main(args):
+def main(cmdargs=None):
+    # for speed sake parse arguments before any imports
+    args = parser.parse_args(cmdargs)
+    # now proceed with imports
     from ciflastic import config
     from pymongo import MongoClient
     from elasticsearch import Elasticsearch
@@ -172,5 +175,4 @@ def main(args):
 
 
 if __name__ == '__main__':
-    args = parser.parse_args()
-    main(args)
+    main()
