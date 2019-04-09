@@ -17,6 +17,10 @@ from setuptools import setup, find_packages
 FALLBACK_VERSION = '0.0.1'
 
 MYNAME = 'ciflastic'
+
+# determine if we run with Python 3.
+PY3 = (sys.version_info[0] == 3)
+
 # versioncfgfile holds version data for git commit hash and date.
 # It must reside in the same directory as version.py.
 MYDIR = os.path.dirname(os.path.abspath(__file__))
@@ -38,7 +42,7 @@ def gitinfo():
 
 
 def getversioncfg():
-    if sys.version_info[0] >= 3:
+    if PY3:
         from configparser import RawConfigParser
     else:
         from ConfigParser import RawConfigParser
@@ -70,10 +74,14 @@ def getversioncfg():
         cp.set('DEFAULT', 'commit', g['commit'])
         cp.set('DEFAULT', 'date', g['date'])
         cp.set('DEFAULT', 'timestamp', g['timestamp'])
-        cp.write(open(versioncfgfile, 'w'))
+        with open(versioncfgfile, 'w') as fp:
+            cp.write(fp)
     return cp
 
 versiondata = getversioncfg()
+
+with open(os.path.join(MYDIR, 'README.md')) as fp:
+    long_description = fp.read()
 
 # define distribution
 setup_args = dict(
@@ -94,6 +102,8 @@ setup_args = dict(
     author = "Pavol Juhas",
     author_email = "pavol.juhas@gmail.com",
     description = "elastic search tools for CIF structures and NSLS2 data",
+    long_description = long_description,
+    long_description_content_type = 'text/markdown',
     license = 'BSD-style license',
     url = "https://github.com/pavoljuhas/ciflastic",
     keywords = "elastic search CIF structures PDF NSLS2 x-ray",
