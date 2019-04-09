@@ -80,6 +80,9 @@ def getversioncfg():
 
 versiondata = getversioncfg()
 
+with open(os.path.join(MYDIR, 'README.md')) as fp:
+    long_description = fp.read()
+
 # define distribution
 setup_args = dict(
     name = MYNAME,
@@ -99,6 +102,8 @@ setup_args = dict(
     author = "Pavol Juhas",
     author_email = "pavol.juhas@gmail.com",
     description = "elastic search tools for CIF structures and NSLS2 data",
+    long_description = long_description,
+    long_description_content_type = 'text/markdown',
     license = 'BSD-style license',
     url = "https://github.com/pavoljuhas/ciflastic",
     keywords = "elastic search CIF structures PDF NSLS2 x-ray",
