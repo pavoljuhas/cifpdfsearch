@@ -48,31 +48,6 @@ def tofloat(s):
     return rv
 
 
-def toisoformat(epoch):
-    """Convert epoch seconds to elasticsearch friendly ISO time.
-
-    When `epoch` is a float return ISO date with millisecond
-    precision.  Otherwise return date rounded to seconds.
-
-    Parameters
-    ----------
-    epoch : float
-        The time in seconds since POSIX epoch in 1970.
-
-    Returns
-    -------
-    isodate : str
-        The ISO formatted date and time with second or millisecond precision.
-    """
-    from datetime import datetime
-    epochms = round(epoch, 3)
-    dt = datetime.fromtimestamp(epochms)
-    tiso = dt.isoformat()
-    rv = tiso[:-3] if dt.microsecond else tiso
-    assert len(rv) in (19, 23)
-    return rv
-
-
 def normcodid(codid):
     """Return COD identifier as 7-digit string.
 
