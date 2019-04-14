@@ -45,7 +45,7 @@ def loadConfig(cfgfile):
         Dictionary of configuration values.
     """
     with open(cfgfile) as fp:
-        cfg = yaml.load(fp)
+        cfg = yaml.safe_load(fp)
     return cfg
 
 

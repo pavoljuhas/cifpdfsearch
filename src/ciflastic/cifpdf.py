@@ -164,7 +164,7 @@ class RAWStorage:
         if e != '.yml':
             f = b + '.yml'
         with open(f) as fp:
-            cfg = yaml.load(fp)
+            cfg = yaml.safe_load(fp)
         f = os.path.abspath(f)
         b, _ = os.path.splitext(f)
         codids = numpy.fromfile(b + '.idx', dtype='int32')
