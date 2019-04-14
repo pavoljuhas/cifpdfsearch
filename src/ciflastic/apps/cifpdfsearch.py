@@ -18,6 +18,8 @@ dspdfpath = 'pdfc/cod{:0>7}'
 
 
 parser = argparse.ArgumentParser(description=__doc__.strip())
+parser.add_argument('--store', choices=['raw', 'hdf'], default='hdf',
+                    help="storage backend for calculated PDFs")
 parser.add_argument('--rmin', type=float,
                     help="lower bound for evaluating correlation coefficient")
 parser.add_argument('--rmax', type=float,
@@ -35,10 +37,19 @@ parser.add_argument('searchpdf', help="PDF data to be matched with COD PDFs, "
 parser.add_argument('composition', nargs='*', help='limit search to specified '
                     'normalized composition, for example "Na 0.5 Cl 0.5"')
 
-def genidpdf_all(hfile):
+def genidpdf_all_hdf(hfile):
     grp = hfile['pdfc']
     for n, v in grp.items():
         yield normcodid(n), v[()]
+    pass
+
+
+def genidpdf_composition_hdf(hfile, composition, tolerance):
+    genids = codsearch_composition(composition, tolerance)
+    for codid in genids:
+        ds = hfile.get(dspdfpath.format(codid))
+        if ds is not None:
+            yield codid, ds[()]
     pass
 
 
@@ -71,15 +82,6 @@ def codsearch_composition(composition, tolerance):
     pass
 
 
-def genidpdf_composition(hfile, composition, tolerance):
-    genids = codsearch_composition(composition, tolerance)
-    for codid in genids:
-        ds = hfile.get(dspdfpath.format(codid))
-        if ds is not None:
-            yield codid, ds[()]
-    pass
-
-
 def correlation(robs, gobs, rcod, gcod, bounds):
     clo = bounds['clo']
     chi = bounds['chi']
@@ -92,7 +94,7 @@ def correlation(robs, gobs, rcod, gcod, bounds):
 
 def calcbounds(robs, rcod, rmin=None, rmax=None):
     """
-    Calculate bounds and overlap indices for give rmin, rmax
+    Calculate bounds and overlap indices for given rmin, rmax
 
     Return
     ------
@@ -113,15 +115,24 @@ def calcbounds(robs, rcod, rmin=None, rmax=None):
 
 
 def main():
+    from functools import partial
     pargs = parser.parse_args()
     composition = ' '.join(pargs.composition)
+    # resolve storage backend
+    if pargs.store == 'hdf':
+        hdb = HDFStorage(PDFSTORAGE)
+        readpdf = hdb.readPDF
+        hfile = hdb._openhdf('r')
+        genidpdf_all = partial(genidpdf_all_hdf, hfile)
+        genidpdf_composition = partial(genidpdf_composition_hdf, hfile)
+    elif pargs.store == 'raw':
+        raise NotImplementedError
     # load observed PDF data to be matched with COD PDFs
-    hdb = HDFStorage(PDFSTORAGE)
     if pargs.searchpdf.startswith('cod:'):
-        robs, gobs = hdb.readPDF(pargs.searchpdf[4:])
+        robs, gobs = readpdf(pargs.searchpdf[4:])
     else:
         robs, gobs = loaddata(pargs.searchpdf, usecols=(0, 1),
-                              dtype=hdb.dtype, unpack=True)
+                              dtype=rcod.dtype, unpack=True)
     # determine the actual bounds used and the rcod slice
     rcod = hdb.rgrid
     bounds = calcbounds(robs, rcod, rmin=pargs.rmin, rmax=pargs.rmax)
@@ -138,8 +149,8 @@ def main():
     # generate correlation coefficients
     has_composition = composition and composition != '*'
     hfile = h5py.File(PDFSTORAGE, mode='r')
-    gpdfs = (genidpdf_composition(hfile, composition, pargs.tolerance)
-             if has_composition else genidpdf_all(hfile))
+    gpdfs = (genidpdf_composition(composition, pargs.tolerance)
+             if has_composition else genidpdf_all())
     gcorr = ((codid, correlation(robs, gobs, rcod, gcod, bounds))
              for codid, gcod in gpdfs if gcod.any())
     gcorr1 = (gcorr if pargs.ccmin <= -1 else
