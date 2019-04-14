@@ -8,6 +8,8 @@ Tools for bulk calculation of pair distribution functions from COD entries.
 import os.path
 import logging
 import math
+import numpy
+import yaml
 
 from ciflastic import normcodid
 
@@ -151,6 +153,62 @@ class HDFStorage:
         return h5py.File(self.filename, mode)
 
 # end of class HDFStorage
+
+# ----------------------------------------------------------------------------
+
+class RAWStorage:
+
+    def __init__(self, filename):
+        b, e = os.path.splitext(filename)
+        f = filename
+        if e != '.yml':
+            f = b + '.yml'
+        with open(f) as fp:
+            cfg = yaml.load(fp)
+        f = os.path.abspath(f)
+        b, _ = os.path.splitext(f)
+        codids = numpy.fromfile(b + '.idx', dtype='int32')
+        index = {c: i for i, c in enumerate(codids)}
+        mcfg = cfg['memmap']
+        pcfg = cfg['pdfcalculator']
+        gdata = numpy.memmap(b + '.bin', mode='r', dtype=mcfg['dtype'])
+        gdata = gdata.reshape(mcfg['shape'])
+        rgrid = numpy.arange(pcfg['rmin'], pcfg['rmax'], pcfg['rstep'],
+                             dtype=mcfg['dtype'])
+        assert len(rgrid) == gdata.shape[1]
+        # all good here - let us assign all attributes
+        self.filename = os.path.abspath(f)
+        self.codids = codids
+        self.index = index
+        self.gdata = gdata
+        self.rgrid = rgrid
+        self.dtype = rgrid.dtype
+        return
+
+
+    def writeConfig(self, cfg):
+        raise NotImplementedError
+
+
+    def writePDF(self, codid, r, g):
+        raise NotImplementedError
+
+
+    def readPDF(self, codid):
+        cid = codid
+        if isinstance(cid, str):
+            cid = int(normcodid(cid))
+        row = self.index[cid]
+        g = self.gdata[row]
+        rv = (self.rgrid, g)
+        return rv
+
+
+    def items(self):
+        rv = zip(self.codids, self.gdata)
+        return rv
+
+# end of class RAWStorage
 
 # Helper functions -----------------------------------------------------------
 
