@@ -7,12 +7,14 @@ Calculate correlation coefficients between given PDFs and COD simulations.
 import os.path
 import argparse
 import numpy
-import h5py
 
 from ciflastic.config import PDFSTORAGE
 from ciflastic.cifpdf import HDFStorage
+from ciflastic.cifpdf import RAWStorage
 from ciflastic import normcodid
 from diffpy.pdfgetx import loaddata
+
+RAWSTORE = os.path.splitext(PDFSTORAGE)[0] + '-raw.yml'
 
 dspdfpath = 'pdfc/cod{:0>7}'
 
@@ -50,6 +52,21 @@ def genidpdf_composition_hdf(hfile, composition, tolerance):
         ds = hfile.get(dspdfpath.format(codid))
         if ds is not None:
             yield codid, ds[()]
+    pass
+
+
+def genidpdf_all_raw(store):
+    return store.items()
+
+
+def genidpdf_composition_raw(store, composition, tolerance):
+    genids = codsearch_composition(composition, tolerance)
+    for codid in genids:
+        try:
+            ds = store.readPDF(codid)[1]
+            yield codid, ds
+        except KeyError:
+            pass
     pass
 
 
@@ -121,12 +138,17 @@ def main():
     # resolve storage backend
     if pargs.store == 'hdf':
         hdb = HDFStorage(PDFSTORAGE)
+        rcod = hdb.rgrid
         readpdf = hdb.readPDF
         hfile = hdb._openhdf('r')
         genidpdf_all = partial(genidpdf_all_hdf, hfile)
         genidpdf_composition = partial(genidpdf_composition_hdf, hfile)
     elif pargs.store == 'raw':
-        raise NotImplementedError
+        store = RAWStorage(RAWSTORE)
+        rcod = store.rgrid
+        readpdf = store.readPDF
+        genidpdf_all = partial(genidpdf_all_raw, store)
+        genidpdf_composition = partial(genidpdf_composition_raw, store)
     # load observed PDF data to be matched with COD PDFs
     if pargs.searchpdf.startswith('cod:'):
         robs, gobs = readpdf(pargs.searchpdf[4:])
@@ -134,7 +156,6 @@ def main():
         robs, gobs = loaddata(pargs.searchpdf, usecols=(0, 1),
                               dtype=rcod.dtype, unpack=True)
     # determine the actual bounds used and the rcod slice
-    rcod = hdb.rgrid
     bounds = calcbounds(robs, rcod, rmin=pargs.rmin, rmax=pargs.rmax)
     # print out the header
     print("#T ciflastic.apps.cifpdfsearch")
@@ -148,7 +169,6 @@ def main():
     print("#L codid  correlation")
     # generate correlation coefficients
     has_composition = composition and composition != '*'
-    hfile = h5py.File(PDFSTORAGE, mode='r')
     gpdfs = (genidpdf_composition(composition, pargs.tolerance)
              if has_composition else genidpdf_all())
     gcorr = ((codid, correlation(robs, gobs, rcod, gcod, bounds))
