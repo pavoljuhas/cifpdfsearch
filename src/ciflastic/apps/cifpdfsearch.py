@@ -38,7 +38,7 @@ parser.add_argument('composition', nargs='*', help='limit search to specified '
 def genidpdf_all(hfile):
     grp = hfile['pdfc']
     for n, v in grp.items():
-        yield normcodid(n), v.value
+        yield normcodid(n), v[()]
     pass
 
 
@@ -76,7 +76,7 @@ def genidpdf_composition(hfile, composition, tolerance):
     for codid in genids:
         ds = hfile.get(dspdfpath.format(codid))
         if ds is not None:
-            yield codid, ds.value
+            yield codid, ds[()]
     pass
 
 

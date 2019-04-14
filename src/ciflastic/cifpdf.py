@@ -135,7 +135,7 @@ class HDFStorage:
         scid = normcodid(codid)
         dsname = self._dspdfpath.format(scid)
         with self._openhdf('r') as hfile:
-            g = hfile[dsname].value
+            g = hfile[dsname][()]
         rv = (self.rgrid, g)
         return rv
 
