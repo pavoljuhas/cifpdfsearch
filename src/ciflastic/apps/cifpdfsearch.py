@@ -169,6 +169,132 @@ def calcbounds(robs, rcod, rmin=None, rmax=None):
     rv = dict(clo=clo, chi=chi, rmin=rcod[clo], rmax=rcod[chi])
     return rv
 
+# temporary UI functions -----------------------------------------------------
+
+def cifsearch(q=None, composition=None, tol=None, fields=None,
+              **kwargs):
+    """
+    Execute search for CIF structures using Lucene query string syntax.
+
+    Parameters
+    ----------
+    q : str, optional
+        The string search query in Lucene syntax.
+    query : dict, optional, keyword-only
+        The search definition using the Query DSL.
+    composition : str, optional
+        Normalized chemical stoichiometry to be matched.
+    tol : float, optional
+        Maximum allowed difference from stoichiometry.
+    fields : list or str, optional
+        Name of CIF fields to be returned.
+    kwargs : misc, optional
+        Extra arguments passed to the `Elasticsearch.search` function.
+
+    Returns
+    -------
+    databroker.Results
+        Iterable object encapsulating the matching databroker Headers.
+    """
+    from diffpy.pdfgetx.functs import composition_analysis
+    from elasticsearch import Elasticsearch
+    es = Elasticsearch(ELASTICHOST)
+    kw = dict(q=q, index='cod')
+    if 'query' in kwargs:
+        kw['body'] = kwargs.pop('query')
+    if composition:
+        smbls, counts = composition_analysis(composition)
+        if not tol:
+            mustterms = [{'term': {("composition." + s): c}}
+                        for s, c in zip(smbls, counts)]
+            cq = {"bool": {"must": mustterms}}
+        else:
+            rangeterms = [
+                {
+                    'range': {
+                        ("composition." + s): {
+                            "gte": c - tol,
+                            "lte": c + tol,
+                        }
+                    }
+                } for s, c in zip(smbls, counts)]
+            cq = {"bool": {"must": rangeterms}}
+        kw['body'] = {'query': cq}
+    kw.update(**kwargs)
+    if isinstance(fields, str):
+        fields = fields.replace(',', ' ').split()
+    if fields:
+        kw['_source'] = fields
+    res = es.search(**kw)
+    rv = res
+    if fields:
+        rv = [tuple(hit['_source'].get(n) for n in fields)
+              for hit in res['hits']['hits']]
+        if len(fields) == 1:
+            rv = [x[0] for x in rv]
+    return rv
+
+
+def cifsimpdf(codid, what='rg'):
+    """Return simulated PDF for the specified identifier.
+
+    Parameters
+    ----------
+    codid : int or str or iterable
+        COD database code for the CIF file or CIF basename.  When CIF
+        basename use the last sequence of exactly 7 digits.
+
+    Returns
+    -------
+    tuple
+    """
+    from collections.abc import Iterable
+    store = RAWStorage(RAWSTORE)
+    cids = codid
+    if isinstance(codid, str) or not isinstance(codid, Iterable):
+        cids = [codid]
+    if what == 'r':
+        return store.rgrid
+    gall = [0 + store.readPDF(c)[1] for c in cids]
+    if what == 'g':
+        rv = tuple(gall)
+    else:
+        rv = 2 * len(gall) * [store.rgrid]
+        rv[1::2] = gall
+        rv = tuple(rv)
+    return rv
+
+
+def cifpdfsearch(filename, composition=None, tol=0, rmin=None, rmax=None,
+                 ccmin=-1, sort=False):
+    from functools import partial
+    store = RAWStorage(RAWSTORE)
+    rcod = store.rgrid
+    readpdf = store.readPDF
+    genidpdf_all = partial(genidpdf_all_raw, store)
+    genidpdf_composition = partial(genidpdf_composition_raw, store)
+    # load observed PDF data to be matched with COD PDFs
+    if filename.startswith('cod:'):
+        robs, gobs = readpdf(filename[4:])
+    else:
+        robs, gobs = loaddata(filename, usecols=(0, 1),
+                              dtype=rcod.dtype, unpack=True)
+    fastcorrcoef = FastCorrelation(robs, gobs, rcod, rmin=rmin, rmax=rmax)
+    # generate correlation coefficients
+    has_composition = composition and composition != '*'
+    gpdfs = (genidpdf_composition(composition, tol)
+             if has_composition else genidpdf_all())
+    gcorr = ((codid, fastcorrcoef(gcod))
+             for codid, gcod in gpdfs if gcod.any())
+    gcorr1 = (gcorr if ccmin <= -1 else
+              (xx for xx in gcorr if xx[1] >= ccmin))
+    gout = gcorr1
+    if sort:
+        gout = sorted(gout, key=lambda x: x[1], reverse=True)
+    rv = list(gout)
+    return rv
+
+# ----------------------------------------------------------------------------
 
 def main():
     from functools import partial
