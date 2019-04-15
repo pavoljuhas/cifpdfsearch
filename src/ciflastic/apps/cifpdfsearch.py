@@ -109,6 +109,44 @@ def correlation(robs, gobs, rcod, gcod, bounds):
     return rv
 
 
+class FastCorrelation:
+
+    def __init__(self, robs, gobs, rcod, rmin=None, rmax=None):
+        eps = 1e-5
+        b = calcbounds(robs, rcod, rmin, rmax)
+        iobs = numpy.round(robs / 0.01).astype(int)
+        icod = numpy.round(rcod / 0.01).astype(int)
+        assert numpy.all(numpy.abs(robs - iobs * 0.01) < eps)
+        assert numpy.all(numpy.abs(rcod - icod * 0.01) < eps)
+        icomm, jj, kk = numpy.intersect1d(
+            icod[b['clo']:b['chi']], iobs, return_indices=True)
+        self.robs1 = robs[kk]
+        self.gobs1 = gobs[kk]
+        csel = jj + b['clo']
+        if len(csel) == len(rcod):
+            csel = slice()
+        elif len(set(numpy.diff(csel))) == 1:
+            csel = slice(csel[0], csel[-1] + 1, csel[1] - csel[0])
+        assert numpy.allclose(rcod[csel], self.robs1)
+        self.csel = csel
+        dtp = self.gobs1.dtype.type
+        self.rn = rn = dtp(1.0 / len(self.gobs1))
+        self.s1gobs = self.gobs1.sum()
+        self.den_gobs = (self.gobs1.dot(self.gobs1) -
+                         rn * self.s1gobs * self.s1gobs)
+        return
+
+
+    def __call__(self, gcod):
+        gcod1 = gcod[self.csel]
+        s1gcod = gcod1.sum()
+        s2gcod = gcod1.dot(gcod1)
+        nom = self.gobs1.dot(gcod1) - s1gcod * self.s1gobs * self.rn
+        den_gcod = s2gcod - s1gcod * s1gcod * self.rn
+        rv = nom / numpy.sqrt(self.den_gobs * den_gcod)
+        return rv
+
+
 def calcbounds(robs, rcod, rmin=None, rmax=None):
     """
     Calculate bounds and overlap indices for given rmin, rmax
@@ -157,6 +195,8 @@ def main():
                               dtype=rcod.dtype, unpack=True)
     # determine the actual bounds used and the rcod slice
     bounds = calcbounds(robs, rcod, rmin=pargs.rmin, rmax=pargs.rmax)
+    fastcorrcoef = FastCorrelation(robs, gobs, rcod,
+                                   rmin=pargs.rmin, rmax=pargs.rmax)
     # print out the header
     print("#T ciflastic.apps.cifpdfsearch")
     print("#C searchpdf =", os.path.basename(pargs.searchpdf))
@@ -171,7 +211,7 @@ def main():
     has_composition = composition and composition != '*'
     gpdfs = (genidpdf_composition(composition, pargs.tolerance)
              if has_composition else genidpdf_all())
-    gcorr = ((codid, correlation(robs, gobs, rcod, gcod, bounds))
+    gcorr = ((codid, fastcorrcoef(gcod))
              for codid, gcod in gpdfs if gcod.any())
     gcorr1 = (gcorr if pargs.ccmin <= -1 else
               (xx for xx in gcorr if xx[1] >= pargs.ccmin))
