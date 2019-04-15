@@ -15,6 +15,7 @@ from ciflastic import normcodid
 from diffpy.pdfgetx import loaddata
 
 RAWSTORE = os.path.splitext(PDFSTORAGE)[0] + '-raw.yml'
+ELASTICHOST = ['provexray.csi.bnl.gov']
 
 dspdfpath = 'pdfc/cod{:0>7}'
 
@@ -74,7 +75,7 @@ def codsearch_composition(composition, tolerance):
     from diffpy.pdfgetx.functs import composition_analysis
     from elasticsearch import Elasticsearch
     from elasticsearch.helpers import scan
-    es = Elasticsearch(['provexray.csi.bnl.gov'])
+    es = Elasticsearch(ELASTICHOST)
     smbls, counts = composition_analysis(composition)
     if tolerance == 0:
         mustterms = [{'term': {("composition." + s): c}}
