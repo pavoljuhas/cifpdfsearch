@@ -173,8 +173,9 @@ class RAWStorage:
         pcfg = cfg['pdfcalculator']
         gdata = numpy.memmap(b + '.bin', mode='r', dtype=mcfg['dtype'])
         gdata = gdata.reshape(mcfg['shape'])
-        rgrid = numpy.arange(pcfg['rmin'], pcfg['rmax'], pcfg['rstep'],
-                             dtype=mcfg['dtype'])
+        npts = round((pcfg['rmax'] - pcfg['rmin']) / pcfg['rstep']) + 1
+        rgrid = numpy.linspace(pcfg['rmin'], pcfg['rmax'], npts,
+                               dtype=mcfg['dtype'])
         assert len(rgrid) == gdata.shape[1]
         # all good here - let us assign all attributes
         self.filename = os.path.abspath(f)
