@@ -178,8 +178,9 @@ def main():
     gout = gcorr1
     if pargs.sort:
         gout = sorted(gout, key=lambda x: x[1], reverse=True)
+    fmt = '{:g}'.format
     for codid, cc in gout:
-        print(codid, cc)
+        print(codid, fmt(cc))
     return
 
 
