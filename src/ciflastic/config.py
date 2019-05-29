@@ -13,7 +13,7 @@ CODDIR : str
     Absolute path to the Crystallography Open Database.
 """
 
-__all__ = ["CODDIR", "PDFSTORAGE", "PDFCALCULATOR", "MONGO", "loadConfig"]
+__all__ = ["CODDIR", "PDFSTORAGE", "PDFCALCULATOR", "loadConfig"]
 
 
 from warnings import warn
@@ -27,7 +27,6 @@ import ciflastic
 CODDIR = ''
 PDFSTORAGE = ''
 PDFCALCULATOR = {}
-MONGO = {}
 
 
 def loadConfig(cfgfile):
@@ -67,8 +66,6 @@ def initialize(cfgfile=None):
     PDFSTORAGE = abspath(expanduser(cfg.get('pdfstorage', '')))
     PDFCALCULATOR.clear()
     PDFCALCULATOR.update(cfg.get('pdfcalculator', {}))
-    MONGO.clear()
-    MONGO.update(cfg.get('mongo', {}))
     return
 
 
