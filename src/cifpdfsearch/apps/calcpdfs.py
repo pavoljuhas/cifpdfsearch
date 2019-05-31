@@ -32,8 +32,8 @@ def calculate(pdfc, ciffile):
 
 
 def main(args):
-    from ciflastic import config, cifpdf, normcodid
-    from ciflastic._utils import getargswithstdin
+    from cifpdfsearch import config, cifpdf, normcodid
+    from cifpdfsearch._utils import getargswithstdin
     from numpy.random import randint
     if args.config:
         config.initialize(args.config)

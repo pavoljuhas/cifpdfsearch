@@ -104,9 +104,9 @@ venv.bak/
 # mypy
 .mypy_cache/
 
-# ciflastic project additions ------------------------------------------------
+# cifpdfsearch project additions ---------------------------------------------
 errors.err
 tags
-/config/ciflastic.yml
+/config/cifpdfsearch.yml
 setup.cfg
 /src/**/version.cfg

@@ -11,11 +11,11 @@ import math
 import numpy
 import yaml
 
-from ciflastic import normcodid
+from cifpdfsearch import normcodid
 
 # register SFTXrayNeutral lookup table
-import ciflastic.sftxrayneutral
-assert ciflastic.sftxrayneutral is not None
+import cifpdfsearch.sftxrayneutral
+assert cifpdfsearch.sftxrayneutral is not None
 
 # ----------------------------------------------------------------------------
 
@@ -101,7 +101,7 @@ class HDFStorage:
 
 
     def writeConfig(self, cfg):
-        from ciflastic._utils import h5writejson
+        from cifpdfsearch._utils import h5writejson
         calc = calculator.fromConfig(cfg)
         with self._openhdf('a') as hfile:
             hfile.pop(self._gconfigcalc, None)

@@ -21,9 +21,9 @@ parser.add_argument('args', nargs='+', metavar='file',
 
 
 def main(args):
-    from ciflastic.cifpdf import HDFStorage
-    from ciflastic import config, normcodid
-    from ciflastic._utils import getargswithstdin
+    from cifpdfsearch.cifpdf import HDFStorage
+    from cifpdfsearch import config, normcodid
+    from cifpdfsearch._utils import getargswithstdin
     if args.config:
         config.initialize(args.config)
     npyfiles = list(getargswithstdin(args.args))

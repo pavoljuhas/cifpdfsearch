@@ -4,7 +4,7 @@ coddir: ~/research/datasets/cod
 
 # Path to PDF storage
 
-pdfstorage: ~/.cache/ciflastic/codpdfs.h5
+pdfstorage: ~/.cache/cifpdfsearch/codpdfs.h5
 
 # PDF calculation setup
 

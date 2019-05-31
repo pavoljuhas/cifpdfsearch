@@ -6,7 +6,7 @@
 import glob
 from pprint import pprint
 from elasticsearch import Elasticsearch, helpers
-from ciflastic import jload, datapath, cifdocument, cifid
+from cifpdfsearch import jload, datapath, cifdocument, cifid
 
 INDEX = 'codtest'
 es = Elasticsearch()

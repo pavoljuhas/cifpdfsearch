@@ -7,9 +7,9 @@ import json
 import os.path
 from pkg_resources import Requirement, resource_filename
 
-from ciflastic.cifdocument import cifid, cifdocument
-from ciflastic._utils import genjson, walkjson, normcodid
-from ciflastic.version import __version__
+from cifpdfsearch.cifdocument import cifid, cifdocument
+from cifpdfsearch._utils import genjson, walkjson, normcodid
+from cifpdfsearch.version import __version__
 
 
 def jload(filename):
@@ -21,7 +21,7 @@ def jload(filename):
 
 
 def datapath(basename):
-    """Return absolute path to data files root in ciflastic.
+    """Return absolute path to data files root in cifpdfsearch.
     """
     return os.path.join(APPDATADIR, basename)
 
@@ -47,7 +47,7 @@ def cifpath(codid):
     TypeError
         When codid is of unsupported type.
     """
-    from ciflastic.config import CODDIR
+    from cifpdfsearch.config import CODDIR
     # handle non-id strings as CIF filenames
     if isinstance(codid, str):
         bn = os.path.basename(codid)
@@ -67,7 +67,7 @@ def gencifpaths():
     str
         Absolute paths to CIF files in the local COD database.
     """
-    from ciflastic.config import CODDIR
+    from cifpdfsearch.config import CODDIR
     top = os.path.join(CODDIR, 'cif')
     for root, dirnames, filenames in os.walk(top):
         if root == top:
@@ -91,7 +91,7 @@ _development_mode = (
 )
 
 # Requirement must have egg-info.  Do not use in _development_mode.
-_req = Requirement.parse("ciflastic")
+_req = Requirement.parse("cifpdfsearch")
 APPDATADIR = (os.path.dirname(_upbasedir) if _development_mode
               else resource_filename(_req, ""))
 APPDATADIR = os.path.abspath(APPDATADIR)

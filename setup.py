@@ -1,9 +1,9 @@
 #!/usr/bin/env python
 
 """
-ciflastic - elastic search tools for CIF structures and NSLS2 data
+cifpdfsearch - elastic search tools for CIF structures and NSLS2 data
 
-Packages:   ciflastic
+Packages:   cifpdfsearch
 """
 
 import os
@@ -16,7 +16,7 @@ from setuptools import setup, find_packages
 # Update when tagging a new release.
 FALLBACK_VERSION = '0.0.1'
 
-MYNAME = 'ciflastic'
+MYNAME = 'cifpdfsearch'
 
 # determine if we run with Python 3.
 PY3 = (sys.version_info[0] == 3)
@@ -89,13 +89,13 @@ setup_args = dict(
     version = versiondata.get('DEFAULT', 'version'),
     packages = find_packages('src'),
     package_dir = {'' : 'src'},
-    # test_suite = 'ciflastic.tests',
+    # test_suite = 'cifpdfsearch.tests',
     include_package_data = True,
     install_requires = [],
     zip_safe = False,
     data_files = [
         ('', ['README.md']),
-        ('config', ['config/ciflastic.yml.template']),
+        ('config', ['config/cifpdfsearch.yml.template']),
         ('standards', (glob.glob('standards/*.json') +
                        glob.glob('standards/*.cif'))),
     ],
@@ -105,7 +105,7 @@ setup_args = dict(
     long_description = long_description,
     long_description_content_type = 'text/markdown',
     license = 'BSD-style license',
-    url = "https://github.com/pavoljuhas/ciflastic",
+    url = "https://github.com/pavoljuhas/cifpdfsearch",
     keywords = "elastic search CIF structures PDF NSLS2 x-ray",
     classifiers = [
         # List of possible values at
