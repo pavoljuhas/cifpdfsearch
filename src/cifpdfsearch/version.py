@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 ##############################################################################
 #
-# ciflastic         Scientific Data Provenance LDRD
+# cifpdfsearch      Scientific Data Provenance LDRD
 #                   (c) 2018 Brookhaven Science Associates,
 #                   Brookhaven National Laboratory.
 #                   All rights reserved.

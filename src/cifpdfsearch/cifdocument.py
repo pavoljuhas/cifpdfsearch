@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 
-from ciflastic._utils import tofloat, grouper, safecall
+from cifpdfsearch._utils import tofloat, grouper, safecall
 
 
 CIFDOCMAP = '''

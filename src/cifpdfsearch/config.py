@@ -4,7 +4,7 @@
 This modules provides constants and paths for local installation.
 
 The recommended way to change these constants is to copy
-"config/ciflastic.yml.template" to "config/ciflastic.aml"
+"config/cifpdfsearch.yml.template" to "config/cifpdfsearch.aml"
 and edit the site settings as needed.
 
 Attributes
@@ -20,7 +20,7 @@ from warnings import warn
 from os.path import expanduser, abspath, join as pathjoin
 from xdg.BaseDirectory import load_first_config, xdg_config_dirs
 import yaml
-import ciflastic
+import cifpdfsearch
 
 # Configuration constants ----------------------------------------------------
 
@@ -31,7 +31,7 @@ PDFCALCULATOR = {}
 
 def loadConfig(cfgfile):
     """
-    Load dictionary of ciflastic configuration values.
+    Load dictionary of cifpdfsearch configuration values.
 
     Arguments
     ---------
@@ -49,12 +49,12 @@ def loadConfig(cfgfile):
 
 
 def initialize(cfgfile=None):
-    cfname = 'ciflastic/ciflastic.yml'
+    cfname = 'cifpdfsearch/cifpdfsearch.yml'
     if cfgfile is None:
         cfgfile = load_first_config(cfname)
         if cfgfile is None:
             cf = pathjoin(xdg_config_dirs[0], cfname)
-            tf = ciflastic.datapath('config/ciflastic.yml.template')
+            tf = cifpdfsearch.datapath('config/cifpdfsearch.yml.template')
             wmsg = ("Cannot find configuration file {}.\n"
                     "Falling back to {}.").format(cf, tf)
             warn(wmsg)

@@ -8,10 +8,10 @@ import os.path
 import argparse
 import numpy
 
-from ciflastic.config import PDFSTORAGE
-from ciflastic.cifpdf import HDFStorage
-from ciflastic.cifpdf import RAWStorage
-from ciflastic import normcodid
+from cifpdfsearch.config import PDFSTORAGE
+from cifpdfsearch.cifpdf import HDFStorage
+from cifpdfsearch.cifpdf import RAWStorage
+from cifpdfsearch import normcodid
 from diffpy.pdfgetx import loaddata
 
 RAWSTORE = os.path.splitext(PDFSTORAGE)[0] + '-raw.yml'
@@ -325,7 +325,7 @@ def main():
     fastcorrcoef = FastCorrelation(robs, gobs, rcod,
                                    rmin=pargs.rmin, rmax=pargs.rmax)
     # print out the header
-    print("#T ciflastic.apps.cifpdfsearch")
+    print("#T cifpdfsearch.apps.cifpdfsearch")
     print("#C searchpdf =", os.path.basename(pargs.searchpdf))
     print("#C composition =", composition or '*')
     print("#C tolerance =", pargs.tolerance)

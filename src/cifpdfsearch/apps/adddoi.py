@@ -33,7 +33,7 @@ def doiaction(filename, index):
 
 
 def main(args):
-    from ciflastic._utils import getargswithstdin
+    from cifpdfsearch._utils import getargswithstdin
     from elasticsearch import Elasticsearch
     from elasticsearch import helpers as eshelpers
     ciflist = getargswithstdin(args.cifs)
